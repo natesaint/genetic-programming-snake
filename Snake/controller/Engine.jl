@@ -12,5 +12,7 @@ include("../view/PlainText.jl")
 function playGame(brain::Function, viewMode::Int, initialSnake::AbstractSnake, initialFood::Block)
 	board = Board(30, 30, 0, initialSnake, initialFood)
 
-	outputPlainText(board)
+	if viewMode == 1
+		outputPlainText(board)
+	end
 end
