@@ -1,5 +1,5 @@
-#################################
-# Represent a block of the Snake
+##################################
+# Represent a block of the Snake.
 #
 include("./Block.jl")
 

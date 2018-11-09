@@ -1,5 +1,5 @@
-###############################
-# Represents the food in Snake
+################################
+# Represents the food in Snake.
 #
 include("./Block.jl")
 

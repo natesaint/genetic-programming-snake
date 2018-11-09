@@ -3,9 +3,9 @@
 # using stdout.
 #
 
-##################################################
+#
 # Output the plain text view, storing elements of 
-# the game board in a Char array and printing it
+# the game board in a Char array and printing it.
 #
 function outputPlainText(board::Board)
 	boardOutput = []

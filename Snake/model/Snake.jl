@@ -1,5 +1,5 @@
-#############################
-# Represent the actual Snake
+##############################
+# Represent the actual Snake.
 #
 include("./SnakeBlock.jl")
 

@@ -1,5 +1,5 @@
-########################################
-# The engine used to run the Snake game
+#########################################
+# The engine used to run the Snake game.
 #
 include("../model/Board.jl")
 include("../view/PlainText.jl")
