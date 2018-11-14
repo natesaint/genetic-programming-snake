@@ -3,8 +3,6 @@
 #
 include("./SnakeBlock.jl")
 
-abstract type AbstractSnake end
-
-struct Snake <: AbstractSnake
+struct Snake
 	snake::Array{SnakeBlock}
 end

@@ -1,10 +1,10 @@
 #####################################################
-# Plain text view of Snake - the game gets displayed 
+# Plain text view of Snake - the game gets displayed
 # using stdout.
 #
 
-#
-# Output the plain text view, storing elements of 
+##################################################
+# Output the plain text view, storing elements of
 # the game board in a Char array and printing it.
 #
 function outputPlainText(board::Board)

@@ -5,12 +5,10 @@
 include("./Snake.jl")
 include("./Food.jl")
 
-abstract type AbstractBoard end
-
-struct Board <: AbstractBoard
+struct Board
 	width::Int
 	height::Int
 	score::Int
-	snake::AbstractSnake
+	snake::Snake
 	food::Food
 end

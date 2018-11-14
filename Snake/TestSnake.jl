@@ -1,4 +1,4 @@
-include("./controller/Engine.jl")
+include("./controller/EngineOutput.jl")
 include("./model/Block.jl")
 include("./model/Board.jl")
 include("./model/Food.jl")
@@ -15,4 +15,4 @@ function sampleBrain()
 	return 1
 end
 
-playGame(sampleBrain, 1, snake, food)
+playGameOutput(sampleBrain, snake, food)

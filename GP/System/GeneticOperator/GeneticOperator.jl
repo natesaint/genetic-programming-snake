@@ -3,3 +3,5 @@
 # programming to modify and create new individuals
 # in a population.
 #
+
+abstract type GeneticOperator end
