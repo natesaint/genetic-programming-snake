@@ -43,8 +43,34 @@ function createInitState(gp::GeneticProgramming)
     gp.state = State(0, Population())
 end
 
+# Given a current population, evolve it and produce the next one
 function evolve(gp::GeneticProgramming)
 end
 
-function runGP(gp::GeneticProgramming)
+# Run the GP process looping through the procedure until the maximum number
+# of generations is reached or the satisfaction criterion is. Return the
+# best of individual.
+#
+# Mode represents the output mode
+# 0 - None
+# 1 - Simple
+# 2 - Verbose
+function runGP(gp::GeneticProgramming, view::Int)
+    # Create initial population
+
+    # Main loop for genetic programming
+    while gp.state.generation < gp.system.numGen
+        print("Generation ")
+        println(gp.state.generation + 1)
+
+        # Check termination criterion
+        println("Checking termination criterion")
+
+
+
+        incrementGeneration(gp.state)
+        println()
+    end
+
+    #return gp.state.bestOf
 end

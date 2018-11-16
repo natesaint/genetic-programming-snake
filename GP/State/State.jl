@@ -4,7 +4,16 @@
 #
 include("./Population.jl")
 
-struct State
+mutable struct State
     generation::Int
     currPopulation::Population
+    #bestOf::Individual
+end
+
+function incrementGeneration(s::State)
+    s.generation = s.generation + 1
+end
+
+function updatePopulation(s::State, newPopulation::Population)
+    s.currPopulation = newPopulation
 end

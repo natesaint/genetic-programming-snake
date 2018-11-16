@@ -50,3 +50,6 @@ createProblem(gp, playGameNoOutput, functionSet, terminalSet)
 createInitState(gp)
 
 dump(gp)
+println("\n")
+
+runGP(gp, 2)
