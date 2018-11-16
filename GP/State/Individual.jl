@@ -6,7 +6,6 @@ include("./InternalNode.jl")
 
 struct Individual
     root::TreeNode
-    fitness::Int
 
-    Individual(rootNode) = new(rootNode, 0)
+    Individual(rootNode) = new(rootNode)
 end

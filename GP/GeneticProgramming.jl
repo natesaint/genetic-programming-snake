@@ -60,11 +60,20 @@ function runGP(gp::GeneticProgramming, view::Int)
 
     # Main loop for genetic programming
     while gp.state.generation < gp.system.numGen
+        i = 0
+
         print("Generation ")
         println(gp.state.generation + 1)
 
-        # Check termination criterion
-        println("Checking termination criterion")
+        # Calculate fitness of each individual in the current population and
+        # check termination criterion
+        while i < gp.system.popSize
+            # Calculate fitness
+
+            # Check termination criterion
+
+            i = i + 1
+        end
 
 
 
