@@ -7,6 +7,6 @@ include("../model/Block.jl")
 
 # Function to play Snake, the snake brain is passed to the function in the
 # place of deciding which direction to move in.
-function playGameNoOutput(brain::Function, initialSnake::Snake, initialFood::Block)
-	board = Board(30, 30, 0, initialSnake, initialFood)
+function playGameNoOutput(brain::Function, initialSnake::Snake, initialFood::Block, sizeX::Int, sizeY::Int)
+	board = Board(sizeX, sizeY, 0, initialSnake, initialFood)
 end

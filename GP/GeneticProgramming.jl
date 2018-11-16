@@ -26,8 +26,8 @@ function createSystem(gp::GeneticProgramming, popSize::Int, numGen::Int, strat::
 end
 
 # Create problem object
-function createProblem(gp::GeneticProgramming, fitnessFunction::Function, functionSet::Array{Function}, terminalSet::Array{Function})
-    gp.problem = Problem(fitnessFunction)
+function createProblem(gp::GeneticProgramming, fitnessFunction::Function, functionSet::Array{Function}, terminalSet::Array{Function}, terminationFunc::Function)
+    gp.problem = Problem(fitnessFunction, terminationFunc)
 
     for func in functionSet
         addFunction(gp.problem.functionSet, func)
@@ -56,30 +56,56 @@ end
 # 1 - Simple
 # 2 - Verbose
 function runGP(gp::GeneticProgramming, view::Int)
+    printInitialConfig(gp)
+
     # Create initial population
+    createInitialPopulation(gp.state.currPopulation, gp.system.popSize)
+
+    # Set best of to the first individual in the population with fitness 0
 
     # Main loop for genetic programming
     while gp.state.generation < gp.system.numGen
-        i = 0
+        i = 1
 
         print("Generation ")
-        println(gp.state.generation + 1)
+        println(gp.state.generation)
 
         # Calculate fitness of each individual in the current population and
         # check termination criterion
-        while i < gp.system.popSize
+        while i <= gp.system.popSize
             # Calculate fitness
 
+
             # Check termination criterion
+            if (gp.problem.terminationCriterion(gp.state.currPopulation[i].fitness, 30, 30))
+                return gp.state.currPopulation[i]
+            end
 
             i = i + 1
         end
-
-
 
         incrementGeneration(gp.state)
         println()
     end
 
-    #return gp.state.bestOf
+    return gp.state.bestOf
+end
+
+# Output the starting configuration of GP
+function printInitialConfig(gp::GeneticProgramming)
+    println("##################################")
+    println("###                            ###")
+    println("### Genetic Programming Config ###")
+    println("###                            ###")
+    println("##################################\n")
+
+    print("Generations: ")
+    println(gp.system.numGen)
+    print("Individuals per generation:")
+    println(gp.system.popSize)
+
+    print("Selection strategy: ")
+    println(gp.system.selectionStrategy)
+
+    println("\n")
 end

@@ -10,6 +10,11 @@ struct Problem
     eval::FitnessEval
     functionSet::FunctionSet
     terminalSet::TerminalSet
+    terminationCriterion::Function
 
-    Problem(fitnessFunc) = new(FitnessEval(fitnessFunc), FunctionSet(), TerminalSet())
+    Problem(fitnessFunc, terminationFunc) = new(FitnessEval(fitnessFunc), FunctionSet(), TerminalSet(), terminationFunc)
+end
+
+function terminationCriterion(indiv::Individual)
+
 end

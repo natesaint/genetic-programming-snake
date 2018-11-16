@@ -15,4 +15,4 @@ function sampleBrain()
 	return 1
 end
 
-playGameOutput(sampleBrain, snake, food)
+playGameOutput(sampleBrain, snake, food, 30, 30)

@@ -12,6 +12,7 @@ include("./GP/System/GeneticOperator/Reproduction.jl")
 include("./Snake/controller/EngineNoOutput.jl")
 include("./GP/Problem/FunctionSet.jl")
 include("./GP/Problem/TerminalSet.jl")
+include("./GP/Problem/TerminationCriterion.jl")
 
 gp = GeneticProgramming()
 
@@ -42,7 +43,7 @@ terminalSet = Function[]
 push!(terminalSet, moveLeft)
 push!(terminalSet, moveRight)
 
-createProblem(gp, playGameNoOutput, functionSet, terminalSet)
+createProblem(gp, playGameNoOutput, functionSet, terminalSet, isMaxScoreRectangleBoard)
 
 #
 # Construct initial state
