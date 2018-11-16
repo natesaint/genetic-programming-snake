@@ -3,6 +3,7 @@
 #
 include("TreeNode.jl")
 
-struct individual
+struct Individual
     root::TreeNode
+    fitness::Int
 end

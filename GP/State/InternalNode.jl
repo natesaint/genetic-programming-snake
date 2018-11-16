@@ -4,4 +4,6 @@
 include("./TreeNode.jl")
 
 struct InternalNode <: TreeNode
+    children::Array{TreeNode}
+    func::Function
 end

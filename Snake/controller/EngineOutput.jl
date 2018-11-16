@@ -2,6 +2,8 @@
 # The controller used to run the Snake game when there is output.
 #
 include("../model/Board.jl")
+include("../model/Snake.jl")
+include("../model/Block.jl")
 include("../view/PlainText.jl")
 
 # Function to play Snake, the snake brain is passed to the function in the

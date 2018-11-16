@@ -3,10 +3,8 @@
 # using stdout.
 #
 
-##################################################
 # Output the plain text view, storing elements of
 # the game board in a Char array and printing it.
-#
 function outputPlainText(board::Board)
 	boardOutput = []
 
@@ -40,9 +38,7 @@ function outputPlainText(board::Board)
 	printArray(boardOutput, board.width + 2, board.height + 2)
 end
 
-####################
 # Print a 2-D array
-#
 function printArray(array::Array{Any, 1}, n::Int, m::Int)
 	for i = 1:n
 		for j = 1:m
