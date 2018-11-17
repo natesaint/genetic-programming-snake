@@ -3,6 +3,8 @@
 #
 include("./TreeNode.jl")
 include("./InternalNode.jl")
+include("../Problem/FunctionSet.jl")
+include("../Problem/TerminalSet.jl")
 
 struct Individual
     root::TreeNode

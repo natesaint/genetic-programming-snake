@@ -28,7 +28,7 @@ end
 
 # Create an initial random population
 function createInitialPopulation(pop::Population, gp::GeneticProgramming)
-    for i = 1:gp.system.popSize
-        addIndividual(pop, genRandomIndividual())
-    end
+    #for i = 1:gp.system.popSize
+    #    addIndividual(pop, genRandomIndividual())
+    #end
 end
