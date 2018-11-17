@@ -5,5 +5,5 @@
 # Check score against the maximum possible score for the given baord of size
 # sizeX by sizeY
 function isMaxScoreRectangleBoard(score::Int, sizeX::Int, sizeY::Int)
-    return score == gameSize * gameSize
+    return score == sizeX * sizeY
 end

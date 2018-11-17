@@ -37,20 +37,22 @@ createSystem(gp, 500, 200, strat, ops)
 # Add functions
 functionSet = Function[]
 push!(functionSet, isFood)
+push!(functionSet, test1)
+push!(functionSet, test2)
+
 
 # Add terminals
 terminalSet = Function[]
 push!(terminalSet, moveLeft)
 push!(terminalSet, moveRight)
 
-createProblem(gp, playGameNoOutput, functionSet, terminalSet, isMaxScoreRectangleBoard)
+createProblem(gp, playGameNoOutput, 5, functionSet, terminalSet, isMaxScoreRectangleBoard)
 
 #
 # Construct initial state
 #
 createInitState(gp)
 
-dump(gp)
-println("\n")
+#dump(gp)
 
-runGP(gp, 2)
+runGP(gp)

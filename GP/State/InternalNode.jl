@@ -7,5 +7,5 @@ struct InternalNode <: TreeNode
     children::Array{TreeNode}
     func::Function
 
-    InternalNode() = new()
+    InternalNode(f) = new(TreeNode[], f)
 end

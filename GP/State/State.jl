@@ -7,7 +7,9 @@ include("./Population.jl")
 mutable struct State
     generation::Int
     currPopulation::Population
-    #bestOf::Individual
+    bestOf::Individual
+
+    State(gen, currPop) = new(gen, currPop)
 end
 
 function incrementGeneration(s::State)

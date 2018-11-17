@@ -2,7 +2,8 @@
 # Represent the population of a generation.
 #
 include("./Individual.jl")
-include("../GeneticProgramming.jl")
+include("../Problem/FunctionSet.jl")
+include("../Problem/TerminalSet.jl")
 
 struct Population
     members::Array{Individual}
@@ -27,8 +28,11 @@ function clearPopulation(pop::Population)
 end
 
 # Create an initial random population
-function createInitialPopulation(pop::Population, gp::GeneticProgramming)
-    #for i = 1:gp.system.popSize
-    #    addIndividual(pop, genRandomIndividual())
-    #end
+function createInitialPopulation(pop::Population, popSize::Int, funcSet::FunctionSet, termSet::TerminalSet)
+    for i = 1:popSize
+        # Generate random function and create an internal node with it
+        node = InternalNode(chooseRand(funcSet))
+        genRandomIndividual(funcSet, termSet, node, 10, 6)
+        addIndividual(pop, Individual(node))
+    end
 end

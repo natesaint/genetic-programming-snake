@@ -12,9 +12,5 @@ struct Problem
     terminalSet::TerminalSet
     terminationCriterion::Function
 
-    Problem(fitnessFunc, terminationFunc) = new(FitnessEval(fitnessFunc), FunctionSet(), TerminalSet(), terminationFunc)
-end
-
-function terminationCriterion(indiv::Individual)
-
+    Problem(fitnessFunc, terminationFunc, numRunsPerTest) = new(FitnessEval(fitnessFunc, numRunsPerTest), FunctionSet(), TerminalSet(), terminationFunc)
 end

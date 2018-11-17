@@ -9,6 +9,7 @@ include("./Problem/TerminalSet.jl")
 include("./System/Selection/Selection.jl")
 include("./System/GeneticOperator/GeneticOperator.jl")
 include("./State/Population.jl")
+include("./Problem/FitnessEval.jl")
 
 mutable struct GeneticProgramming
     system::System
@@ -26,8 +27,8 @@ function createSystem(gp::GeneticProgramming, popSize::Int, numGen::Int, strat::
 end
 
 # Create problem object
-function createProblem(gp::GeneticProgramming, fitnessFunction::Function, functionSet::Array{Function}, terminalSet::Array{Function}, terminationFunc::Function)
-    gp.problem = Problem(fitnessFunction, terminationFunc)
+function createProblem(gp::GeneticProgramming, fitnessFunction::Function, numRunsPerFitnessTest::Int, functionSet::Array{Function}, terminalSet::Array{Function}, terminationFunc::Function)
+    gp.problem = Problem(fitnessFunction, terminationFunc, numRunsPerFitnessTest)
 
     for func in functionSet
         addFunction(gp.problem.functionSet, func)
@@ -50,39 +51,46 @@ end
 # Run the GP process looping through the procedure until the maximum number
 # of generations is reached or the satisfaction criterion is. Return the
 # best of individual.
-#
-# Mode represents the output mode
-# 0 - None
-# 1 - Simple
-# 2 - Verbose
-function runGP(gp::GeneticProgramming, view::Int)
+function runGP(gp::GeneticProgramming)
     printInitialConfig(gp)
 
     # Create initial population
-    createInitialPopulation(gp.state.currPopulation, gp.system.popSize)
+    println("Creating initial random population")
+    createInitialPopulation(gp.state.currPopulation, gp.system.popSize, gp.problem.functionSet, gp.problem.terminalSet)
+    println("Initial population created\n")
 
     # Set best of to the first individual in the population with fitness 0
+    gp.state.bestOf = gp.state.currPopulation.members[1]
 
     # Main loop for genetic programming
     while gp.state.generation < gp.system.numGen
         i = 1
 
         print("Generation ")
-        println(gp.state.generation)
+        println(gp.state.generation + 1)
 
         # Calculate fitness of each individual in the current population and
         # check termination criterion
         while i <= gp.system.popSize
-            # Calculate fitness
-
+            # Calculate avg fitness over 5 runs
+            println("Calculating average fitness")
+            push!(gp.state.currPopulation.fitness, calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[i]))
+            print("Average fitness over ")
+            print(gp.problem.eval.numRunsPerFitnessTest)
+            print(" runs is ")
+            println(gp.state.currPopulation.fitness[i])
 
             # Check termination criterion
-            if (gp.problem.terminationCriterion(gp.state.currPopulation[i].fitness, 30, 30))
-                return gp.state.currPopulation[i]
+            if (gp.problem.terminationCriterion(gp.state.currPopulation.fitness[i], 30, 30))
+                println("Termination criterion satisfied - returning 'best of' individual")
+                return gp.state.currPopulation.members[i]
             end
 
             i = i + 1
         end
+
+        # Perform genetic operators to create a new population with evolve()
+        evolve(gp)
 
         incrementGeneration(gp.state)
         println()
@@ -93,19 +101,37 @@ end
 
 # Output the starting configuration of GP
 function printInitialConfig(gp::GeneticProgramming)
-    println("##################################")
-    println("###                            ###")
-    println("### Genetic Programming Config ###")
-    println("###                            ###")
-    println("##################################\n")
+    println("=====================")
+    println("    Configuration    ")
+    println("=====================")
 
     print("Generations: ")
     println(gp.system.numGen)
-    print("Individuals per generation:")
+    print("Individuals per generation: ")
     println(gp.system.popSize)
 
     print("Selection strategy: ")
     println(gp.system.selectionStrategy)
 
-    println("\n")
+    print("Genetic operators: ")
+    println(gp.system.geneticOperators)
+
+    println("Fitness evaluation: ")
+    print("    Function: ")
+    println(gp.problem.eval.fitnessFunc)
+    print("    Number of runs per test: ")
+    println(gp.problem.eval.numRunsPerFitnessTest)
+
+    print("Function set: ")
+    println(gp.problem.functionSet.functions)
+    print("Terminal set: ")
+    println(gp.problem.terminalSet.terminals)
+
+    print("Termination criterion: ")
+    println(gp.problem.terminationCriterion)
+    println()
+
+    println("==================")
+    println("    Running GP    ")
+    println("==================")
 end
