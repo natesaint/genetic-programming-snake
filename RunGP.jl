@@ -25,10 +25,11 @@ strat = FitnessProportionalSelection()
 
 # Genetic operators to use in gp
 ops = GeneticOperator[]
-push!(ops, Crossover())
-push!(ops, Reproduction())
+push!(ops, Crossover(0.90))
+push!(ops, Reproduction(0.10))
 
-createSystem(gp, 500, 200, strat, ops)
+#createSystem(gp, 500, 200, strat, ops)
+createSystem(gp, 5, 3, strat, ops)
 
 #
 # Construct problem
@@ -36,13 +37,25 @@ createSystem(gp, 500, 200, strat, ops)
 
 # Add functions
 functionSet = Function[]
-push!(functionSet, isFood)
-push!(functionSet, test1)
-push!(functionSet, test2)
+push!(functionSet, connector)
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
 
 
 # Add terminals
 terminalSet = Function[]
+push!(terminalSet, moveUp)
+push!(terminalSet, moveDown)
 push!(terminalSet, moveLeft)
 push!(terminalSet, moveRight)
 

@@ -1,6 +1,9 @@
 #################################################
 # Housing for the genetic programming algorithm.
 #
+using Pkg
+Pkg.add("StatsBase")
+using StatsBase
 include("./State/State.jl")
 include("./System/System.jl")
 include("./Problem/Problem.jl")
@@ -8,6 +11,8 @@ include("./Problem/FunctionSet.jl")
 include("./Problem/TerminalSet.jl")
 include("./System/Selection/Selection.jl")
 include("./System/GeneticOperator/GeneticOperator.jl")
+include("./System/GeneticOperator/Crossover.jl")
+include("./System/GeneticOperator/Reproduction.jl")
 include("./State/Population.jl")
 include("./Problem/FitnessEval.jl")
 
@@ -46,6 +51,30 @@ end
 
 # Given a current population, evolve it and produce the next one
 function evolve(gp::GeneticProgramming)
+    newPop = Population()
+
+    # Setup for sampling
+    weights = Float64[]
+    for op in gp.system.geneticOperators
+        push!(weights, op.probability)
+    end
+
+    # While the new population is less than the number of indivs per population,
+    # keep adding new idividuals using the genetic operation selected via
+    # sampling
+    while getNumIndividuals(newPop) < gp.system.popSize
+        # With sampling, choose the genetic operation to use
+        selectedOp = wsample(gp.system.geneticOperators, weights)
+
+        # Make sure crossover doesn't happen if only one more indiviudal can fit
+        if (gp.system.popSize - 1 == getNumIndividuals(newPop))
+            geneticOperation(Reproduction(1.0), gp.state, gp.system, newPop)
+        else
+            geneticOperation(selectedOp, gp.state, gp.system, newPop)
+        end
+    end
+
+    gp.state.currPopulation = newPop
 end
 
 # Run the GP process looping through the procedure until the maximum number
@@ -71,14 +100,15 @@ function runGP(gp::GeneticProgramming)
 
         # Calculate fitness of each individual in the current population and
         # check termination criterion
+        println("Calculating fitness of each individual")
         while i <= gp.system.popSize
             # Calculate avg fitness over 5 runs
-            println("Calculating average fitness")
+            #println("Calculating average fitness")
             push!(gp.state.currPopulation.fitness, calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[i]))
-            print("Average fitness over ")
-            print(gp.problem.eval.numRunsPerFitnessTest)
-            print(" runs is ")
-            println(gp.state.currPopulation.fitness[i])
+            #print("Average fitness over ")
+            #print(gp.problem.eval.numRunsPerFitnessTest)
+            #print(" runs is ")
+            #println(gp.state.currPopulation.fitness[i])
 
             # Check termination criterion
             if (gp.problem.terminationCriterion(gp.state.currPopulation.fitness[i], 30, 30))
@@ -88,6 +118,8 @@ function runGP(gp::GeneticProgramming)
 
             i = i + 1
         end
+
+        # Save the best of individual for this generation
 
         # Perform genetic operators to create a new population with evolve()
         evolve(gp)

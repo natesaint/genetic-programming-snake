@@ -18,8 +18,22 @@ function chooseRand(termSet::TerminalSet)
     return termSet.terminals[rand(1:length(termSet.terminals))]
 end
 
-function moveLeft()
+#
+# Functions that can be used in the terminal set
+#
+
+function moveUp(board::Board)
+    board.move = "up"
 end
 
-function moveRight()
+function moveDown(board::Board)
+    board.move = "down"
+end
+
+function moveLeft(board::Board)
+    board.move = "left"
+end
+
+function moveRight(board::Board)
+    board.move = "right"
 end

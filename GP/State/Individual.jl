@@ -50,3 +50,8 @@ function genRanFuncTerm(funcSet::FunctionSet, termSet::TerminalSet)
         return LeafNode(selected)
     end
 end
+
+# Text-based output for an individual
+function printIndividual(indiv::Individual)
+    visualizeTree(indiv.root, 0)
+end

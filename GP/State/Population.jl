@@ -4,6 +4,7 @@
 include("./Individual.jl")
 include("../Problem/FunctionSet.jl")
 include("../Problem/TerminalSet.jl")
+include("../../Snake/model/Board.jl")
 
 struct Population
     members::Array{Individual}
@@ -19,7 +20,7 @@ end
 
 # Get the number of individuals in the population
 function getNumIndividuals(pop::Population)
-    return pop.members.length
+    return length(pop.members)
 end
 
 # Clear the population
@@ -33,6 +34,10 @@ function createInitialPopulation(pop::Population, popSize::Int, funcSet::Functio
         # Generate random function and create an internal node with it
         node = InternalNode(chooseRand(funcSet))
         genRandomIndividual(funcSet, termSet, node, 10, 6)
-        addIndividual(pop, Individual(node))
+        indiv = Individual(node)
+        #printIndividual(indiv)
+        #println(parseTreeStr(indiv.root))
+        #println()
+        addIndividual(pop, indiv)
     end
 end
