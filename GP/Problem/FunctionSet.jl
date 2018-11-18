@@ -23,41 +23,54 @@ end
 # Functions that can be used in the function set
 #
 
-function connector(board::Board, param1::Function, param2::Function)
+function connector(board::Board, param1::String, param2::String)
+    return "connector"
 end
 
-function ifFoodAhead(board::Board, param1::Function, param2::Function)
+function ifFoodAhead(board::Board, param1::String, param2::String)
+    return "ifFoodAhead"
 end
 
-function ifDangerAhead(board::Board, param1::Function, param2::Function)
+function ifDangerAhead(board::Board, param1::String, param2::String)
+    return "ifDangerAhead"
 end
 
-function ifDangerRight(board::Board, param1::Function, param2::Function)
+function ifDangerRight(board::Board, param1::String, param2::String)
+    return "ifDangerRight"
 end
 
-function ifDangerLeft(board::Board, param1::Function, param2::Function)
+function ifDangerLeft(board::Board, param1::String, param2::String)
+    return "ifDangerLeft"
 end
 
-function ifDangerLeft(board::Board, param1::Function, param2::Function)
+function ifDangerLeft(board::Board, param1::String, param2::String)
+    return "ifDangerLeft"
 end
 
-function ifDangerTwoAhead(board::Board, param1::Function, param2::Function)
+function ifDangerTwoAhead(board::Board, param1::String, param2::String)
+    return "ifDangerTwoAhead"
 end
 
-function ifFoodUp(board::Board, param1::Function, param2::Function)
+function ifFoodUp(board::Board, param1::String, param2::String)
+    return "ifFoodUp"
 end
 
-function ifFoodRight(board::Board, param1::Function, param2::Function)
+function ifFoodRight(board::Board, param1::String, param2::String)
+    return "ifFoodRight"
 end
 
-function ifMovingUp(board::Board, param1::Function, param2::Function)
+function ifMovingUp(board::Board, param1::String, param2::String)
+    return "ifMovingUp"
 end
 
-function ifMovingDown(board::Board, param1::Function, param2::Function)
+function ifMovingDown(board::Board, param1::String, param2::String)
+    return "ifMovingDown"
 end
 
-function ifMovingLeft(board::Board, param1::Function, param2::Function)
+function ifMovingLeft(board::Board, param1::String, param2::String)
+    return "ifMovingLeft"
 end
 
-function ifMovingRight(board::Board, param1::Function, param2::Function)
+function ifMovingRight(board::Board, param1::String, param2::String)
+    return "ifMovingRight"
 end

@@ -10,17 +10,19 @@ function parseTreeStr(node::TreeNode)
     str = string("", node.func, "(")
 
     if typeof(node) == InternalNode
-        str = string(str, "board, ")
+        str = string(str, "currBoard, ")
         i = 1
         for n in node.children
+            #str = string(str, "string(")
             str = string(str, parseTreeStr(n))
+            #str = string(str, ")")
             if i != length(node.children)
                 str = string(str, ", ")
             end
             i = i + 1
         end
     else
-        str = string(str, "board")
+        str = string(str, "currBoard")
     end
 
     str = string(str, ")")

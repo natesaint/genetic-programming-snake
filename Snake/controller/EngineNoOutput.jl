@@ -12,5 +12,22 @@ currBoard = Board()
 function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30)
 	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
 
+	currBoard.move = chooseRandDirection()
+
+	println(brain)
+
+	# Game loop
+	println(currBoard.move)
+	eval(Meta.parse(brain)) ## HERE IS THE PROBLEM CURRENTLY
+	println(currBoard.move)
+	while true
+	end
+
 	return currBoard.score
+end
+
+# Choose random direction
+function chooseRandDirection()
+	directions = ["up", "down", "right", "left"]
+	return directions[rand(1:4)]
 end

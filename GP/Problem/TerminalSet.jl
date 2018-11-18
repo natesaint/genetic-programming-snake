@@ -23,17 +23,25 @@ end
 #
 
 function moveUp(board::Board)
-    board.move = "up"
+    println("moveUp")
+    println(board)
+    board.move = "hi"
 end
 
 function moveDown(board::Board)
-    board.move = "down"
+    println("moveDown")
+    println(board)
+    board.move = "hi"
 end
 
 function moveLeft(board::Board)
-    board.move = "left"
+    println("moveLeft")
+    println(board)
+    board.move = "hi"
 end
 
 function moveRight(board::Board)
-    board.move = "right"
+    println("moveRight")
+    println(board)
+    board.move = "hi"
 end

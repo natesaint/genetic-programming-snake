@@ -5,7 +5,7 @@
 include("./Snake.jl")
 include("./Food.jl")
 
-struct Board
+mutable struct Board
 	width::Int
 	height::Int
 	score::Int

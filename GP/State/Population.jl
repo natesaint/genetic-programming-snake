@@ -33,7 +33,8 @@ function createInitialPopulation(pop::Population, popSize::Int, funcSet::Functio
     for i = 1:popSize
         # Generate random function and create an internal node with it
         node = InternalNode(chooseRand(funcSet))
-        genRandomIndividual(funcSet, termSet, node, 10, 6)
+        #genRandomIndividual(funcSet, termSet, node, 5, 0)
+        genRandomIndividual(funcSet, termSet, node, 2, 0)
         indiv = Individual(node)
         #printIndividual(indiv)
         #println(parseTreeStr(indiv.root))

@@ -29,7 +29,7 @@ push!(ops, Crossover(0.90))
 push!(ops, Reproduction(0.10))
 
 #createSystem(gp, 500, 200, strat, ops)
-createSystem(gp, 5, 3, strat, ops)
+createSystem(gp, 2, 3, strat, ops)
 
 #
 # Construct problem

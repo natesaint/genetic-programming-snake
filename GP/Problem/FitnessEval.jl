@@ -28,6 +28,8 @@ end
 function evaluateFitness(fe::FitnessEval, snakeBrain::Individual)
     # Get the parsed string of the current individual being tested
     exprStr = parseTreeStr(snakeBrain.root)
+    #println(exprStr)
+    #println()
 
     # Setup initial snake game settings
     x = rand(1:30)
@@ -47,6 +49,6 @@ function evaluateFitness(fe::FitnessEval, snakeBrain::Individual)
     push!(snakeArr, snakeBlock)
     snake = Snake(snakeArr)
 
-    return playGameNoOutput(exprStr, snake, food)
+    return fe.fitnessFunc(exprStr, snake, food)
     #return 800#900
 end
