@@ -1,18 +1,25 @@
 ########################################################
 # Run an instance of the genetic programming algorithm.
 #
-include("./GP/GeneticProgramming.jl")
-include("./GP/System/System.jl")
-include("./GP/System/Selection/Selection.jl")
-include("./GP/System/Selection/FitnessProportionalSelection.jl")
-include("./GP/System/Selection/TournamentSelection.jl")
-include("./GP/System/GeneticOperator/GeneticOperator.jl")
-include("./GP/System/GeneticOperator/Crossover.jl")
-include("./GP/System/GeneticOperator/Reproduction.jl")
-include("./Snake/controller/EngineNoOutput.jl")
-include("./GP/Problem/FunctionSet.jl")
-include("./GP/Problem/TerminalSet.jl")
-include("./GP/Problem/TerminationCriterion.jl")
+println("Loading and including files")
+using Pkg
+Pkg.add("StatsBase")
+using StatsBase
+include("./Snake/LoadSnake.jl")
+include("./GP/LoadGP.jl")
+println("Done loading and including files")
+#include("./GP/GeneticProgramming.jl")
+#include("./GP/System/System.jl")
+#include("./GP/System/Selection/Selection.jl")
+#include("./GP/System/Selection/FitnessProportionalSelection.jl")
+#include("./GP/System/Selection/TournamentSelection.jl")
+#include("./GP/System/GeneticOperator/GeneticOperator.jl")
+#include("./GP/System/GeneticOperator/Crossover.jl")
+#include("./GP/System/GeneticOperator/Reproduction.jl")
+#include("./Snake/controller/EngineNoOutput.jl")
+#include("./GP/Problem/FunctionSet.jl")
+#include("./GP/Problem/TerminalSet.jl")
+#include("./GP/Problem/TerminationCriterion.jl")
 
 gp = GeneticProgramming()
 

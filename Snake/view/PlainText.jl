@@ -29,11 +29,11 @@ function outputPlainText(board::Board)
 
 	# Add Snake
 	for row in board.snake.snake
-		boardOutput[row.x][row.y] = "O"
+		boardOutput[row.x + 1][row.y + 1] = "O"
 	end
 
 	# Add Food
-	boardOutput[board.food.x][board.food.y] = "*"
+	boardOutput[board.food.x + 1][board.food.y + 1] = "*"
 
 	printArray(boardOutput, board.width + 2, board.height + 2)
 end

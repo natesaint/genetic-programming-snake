@@ -2,13 +2,13 @@
 # Functionality to evaluate the fitness of an individual
 # or a set of individuals.
 #
-include("../State/Individual.jl")
-include("../../Snake/model/Board.jl")
-include("../State/TreeNode.jl")
-include("../../Snake/controller/EngineNoOutput.jl")
-include("../../Snake/model/Food.jl")
-include("../../Snake/model/Snake.jl")
-include("../../Snake/model/SnakeBlock.jl")
+#include("../State/Individual.jl")
+#include("../../Snake/model/Board.jl")
+#include("../State/TreeNode.jl")
+#include("../../Snake/controller/EngineNoOutput.jl")
+#include("../../Snake/model/Food.jl")
+#include("../../Snake/model/Snake.jl")
+#include("../../Snake/model/SnakeBlock.jl")
 
 struct FitnessEval
     fitnessFunc::Function

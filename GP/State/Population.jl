@@ -1,10 +1,10 @@
 ############################################
 # Represent the population of a generation.
 #
-include("./Individual.jl")
-include("../Problem/FunctionSet.jl")
-include("../Problem/TerminalSet.jl")
-include("../../Snake/model/Board.jl")
+#include("./Individual.jl")
+#include("../Problem/FunctionSet.jl")
+#include("../Problem/TerminalSet.jl")
+#include("../../Snake/model/Board.jl")
 
 struct Population
     members::Array{Individual}

@@ -2,7 +2,7 @@
 # Represent attributes stored as a part of the
 # current state of GP.
 #
-include("./Population.jl")
+#include("./Population.jl")
 
 mutable struct State
     generation::Int

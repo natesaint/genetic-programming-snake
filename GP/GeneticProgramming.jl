@@ -1,20 +1,20 @@
 #################################################
 # Housing for the genetic programming algorithm.
 #
-using Pkg
-Pkg.add("StatsBase")
-using StatsBase
-include("./State/State.jl")
-include("./System/System.jl")
-include("./Problem/Problem.jl")
-include("./Problem/FunctionSet.jl")
-include("./Problem/TerminalSet.jl")
-include("./System/Selection/Selection.jl")
-include("./System/GeneticOperator/GeneticOperator.jl")
-include("./System/GeneticOperator/Crossover.jl")
-include("./System/GeneticOperator/Reproduction.jl")
-include("./State/Population.jl")
-include("./Problem/FitnessEval.jl")
+#using Pkg
+#Pkg.add("StatsBase")
+#using StatsBase
+#include("./State/State.jl")
+#include("./System/System.jl")
+#include("./Problem/Problem.jl")
+#include("./Problem/FunctionSet.jl")
+#include("./Problem/TerminalSet.jl")
+#include("./System/Selection/Selection.jl")
+#include("./System/GeneticOperator/GeneticOperator.jl")
+#include("./System/GeneticOperator/Crossover.jl")
+#include("./System/GeneticOperator/Reproduction.jl")
+#include("./State/Population.jl")
+#include("./Problem/FitnessEval.jl")
 
 mutable struct GeneticProgramming
     system::System

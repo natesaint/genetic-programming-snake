@@ -2,8 +2,8 @@
 # Fitness Proportional Selection strategy for selecting
 # individuals.
 #
-include("./Selection.jl")
-include("../../State/Population.jl")
+#include("./Selection.jl")
+#include("../../State/Population.jl")
 
 struct FitnessProportionalSelection <: Selection
 end

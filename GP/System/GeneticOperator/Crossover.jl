@@ -2,10 +2,10 @@
 # The crossover genetic operation used in
 # genetic programming.
 #
-include("./GeneticOperator.jl")
-include("../../State/State.jl")
-include("../../State/Population.jl")
-include("../../State/Individual.jl")
+#include("./GeneticOperator.jl")
+#include("../../State/State.jl")
+#include("../../State/Population.jl")
+#include("../../State/Individual.jl")
 
 struct Crossover <: GeneticOperator
     probability::Float64

@@ -2,13 +2,13 @@
 # The reproduction genetic operation used in
 # genetic programming.
 #
-include("./GeneticOperator.jl")
-include("../../State/State.jl")
-include("../../State/Population.jl")
-include("../../State/Individual.jl")
-include("../System.jl")
-include("../Selection/FitnessProportionalSelection.jl")
-include("../Selection/TournamentSelection.jl")
+#include("./GeneticOperator.jl")
+#include("../../State/State.jl")
+#include("../../State/Population.jl")
+#include("../../State/Individual.jl")
+#include("../System.jl")
+#include("../Selection/FitnessProportionalSelection.jl")
+#include("../Selection/TournamentSelection.jl")
 
 struct Reproduction <: GeneticOperator
     probability::Float64
