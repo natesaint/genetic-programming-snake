@@ -3,7 +3,7 @@
 #
 include("./Block.jl")
 
-struct SnakeBlock <: Block
+mutable struct SnakeBlock <: Block
 	x::Int
 	y::Int
 end

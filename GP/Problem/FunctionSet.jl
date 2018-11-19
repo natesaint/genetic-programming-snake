@@ -43,10 +43,6 @@ function ifDangerLeft(board::Board, param1::String, param2::String)
     return "ifDangerLeft"
 end
 
-function ifDangerLeft(board::Board, param1::String, param2::String)
-    return "ifDangerLeft"
-end
-
 function ifDangerTwoAhead(board::Board, param1::String, param2::String)
     return "ifDangerTwoAhead"
 end
@@ -60,17 +56,33 @@ function ifFoodRight(board::Board, param1::String, param2::String)
 end
 
 function ifMovingUp(board::Board, param1::String, param2::String)
-    return "ifMovingUp"
+    if board.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifMovingDown(board::Board, param1::String, param2::String)
-    return "ifMovingDown"
+    if board.move == "down"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifMovingLeft(board::Board, param1::String, param2::String)
-    return "ifMovingLeft"
+    if board.move == "left"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifMovingRight(board::Board, param1::String, param2::String)
-    return "ifMovingRight"
+    if board.move == "right"
+        return param1
+    else
+        return param2
+    end
 end

@@ -44,11 +44,10 @@ createSystem(gp, 2, 3, strat, ops)
 
 # Add functions
 functionSet = Function[]
-push!(functionSet, connector)
+#push!(functionSet, connector)
 push!(functionSet, ifFoodAhead)
 push!(functionSet, ifDangerAhead)
 push!(functionSet, ifDangerRight)
-push!(functionSet, ifDangerLeft)
 push!(functionSet, ifDangerLeft)
 push!(functionSet, ifDangerTwoAhead)
 push!(functionSet, ifFoodUp)

@@ -19,23 +19,60 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 	println(brain)
 
 	# Game loop
-	println(currBoard.move)
-	eval(Meta.parse(brain)) ## HERE IS THE PROBLEM CURRENTLY
-	println(currBoard.move)
-	outputPlainText(currBoard)
 	while true
-		#eval(Meta.parse(brain))
-		#if applyMove(currBoard) == -1
-		#	break
-		#end
+		#newMove = eval(Meta.parse(brain))
+		newMove = "right"
+		println(newMove)
+		if applyMove(currBoard, newMove) == -1
+			break
+		end
+		outputPlainText(currBoard)
+		sleep(1)
 	end
 
 	return currBoard.score
 end
 
 # Update the head of the snake based on the move, return -1 on collision (game over)
-function applyMove(b::Board)
-	println(b.move)
+function applyMove(b::Board, move::String)
+	newSnakeBlock = SnakeBlock(-1, -1)
+	if move == "up"
+		newSnakeBlock.x = b.snake.snake[1].x
+		newSnakeBlock.y = b.snake.snake[1].y - 1
+	elseif move == "down"
+		newSnakeBlock.x = b.snake.snake[1].x
+		newSnakeBlock.y = b.snake.snake[1].y + 1
+	elseif move == "left"
+		newSnakeBlock.x = b.snake.snake[1].x - 1
+		newSnakeBlock.y = b.snake.snake[1].y
+	elseif move == "right"
+		newSnakeBlock.x = b.snake.snake[1].x + 1
+		newSnakeBlock.y = b.snake.snake[1].y
+	else
+		return -1
+	end
+
+	# Check if new block is out of bounds
+	if newSnakeBlock.x <= 0 || newSnakeBlock.y <= 0 || newSnakeBlock.x >= b.width || newSnakeBlock.y >= b.height
+		return -1
+	end
+
+	# Check if new block collides with another snake block
+	for i in 1:(length(b.snake.snake) - 1)
+		if b.snake.snake[i].x == newSnakeBlock.x && b.snake.snake[i].y == newSnakeBlock.y
+			return -1
+		end
+	end
+
+	# Update the snake array
+	if length(b.snake.snake) != 1
+		for i in length(b.snake.snake):2
+			b.snake.snake[i] = b.snake.snake[i - 1]
+		end
+	end
+	b.snake.snake[1] = newSnakeBlock
+
+	return 0
 end
 
 # Check if snake is colliding with self or wall

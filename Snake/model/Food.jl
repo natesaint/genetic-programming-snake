@@ -3,8 +3,7 @@
 #
 include("./Block.jl")
 
-struct Food <: Block
+mutable struct Food <: Block
 	x::Int
 	y::Int
 end
-

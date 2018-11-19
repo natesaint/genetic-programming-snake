@@ -22,26 +22,26 @@ end
 # Functions that can be used in the terminal set
 #
 
-function moveUp(board::Board)
+function moveUp()
     #println("moveUp")
     #println(board)
-    board.move = "up"
+    return "up"
 end
 
-function moveDown(board::Board)
+function moveDown()
     #println("moveDown")
     #println(board)
-    board.move = "down"
+    return "down"
 end
 
-function moveLeft(board::Board)
+function moveLeft()
     #println("moveLeft")
     #println(board)
-    board.move = "left"
+    return "left"
 end
 
-function moveRight(board::Board)
+function moveRight()
     #println("moveRight")
     #println(board)
-    board.move = "right"
+    return "right"
 end
