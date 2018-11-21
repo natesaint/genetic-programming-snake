@@ -20,7 +20,7 @@ function genRandomIndividual(funcSet::FunctionSet, termSet::TerminalSet, currNod
         # Generate new children for each parameter
         for m in methods(currNode.func)
             numArgs = length(m.sig.parameters)
-            for i in 1:(numArgs - 2)
+            for i in 1:(numArgs - 1)
                 generated = nothing
                 if (currDepth < maxDepth)
                     generated = genRanFuncTerm(funcSet::FunctionSet, termSet::TerminalSet)

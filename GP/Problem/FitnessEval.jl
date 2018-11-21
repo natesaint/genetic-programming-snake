@@ -21,7 +21,7 @@ function calculateAvgFitness(fe::FitnessEval, numRuns::Int, snakeBrain::Individu
     for i in 1:fe.numRunsPerFitnessTest
         fitSum = fitSum + evaluateFitness(fe, snakeBrain)
     end
-    return fitSum / fe.numRunsPerFitnessTest
+    return convert(Int64, round(fitSum / fe.numRunsPerFitnessTest))
 end
 
 # Evaluate the fitness by getting the expression from the tree and checking it

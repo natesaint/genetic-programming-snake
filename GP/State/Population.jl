@@ -36,9 +36,6 @@ function createInitialPopulation(pop::Population, popSize::Int, funcSet::Functio
         #genRandomIndividual(funcSet, termSet, node, 5, 0)
         genRandomIndividual(funcSet, termSet, node, 2, 0)
         indiv = Individual(node)
-        #printIndividual(indiv)
-        #println(parseTreeStr(indiv.root))
-        #println()
         addIndividual(pop, indiv)
     end
 end

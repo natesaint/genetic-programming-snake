@@ -24,31 +24,59 @@ end
 #
 
 function ifFoodAhead(param1::String, param2::String)
-    return "ifFoodAhead"
+    if currBoard.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifDangerAhead(param1::String, param2::String)
-    return "ifDangerAhead"
+    if currBoard.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifDangerRight(param1::String, param2::String)
-    return "ifDangerRight"
+    if currBoard.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifDangerLeft(param1::String, param2::String)
-    return "ifDangerLeft"
+    if currBoard.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifDangerTwoAhead(param1::String, param2::String)
-    return "ifDangerTwoAhead"
+    if currBoard.move == "up"
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifFoodUp(param1::String, param2::String)
-    return "ifFoodUp"
+    if currBoard.food.y < currBoard.snake.snake[1].y
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifFoodRight(param1::String, param2::String)
-    return "ifFoodRight"
+    if currBoard.food.x > currBoard.snake.snake[1].x
+        return param1
+    else
+        return param2
+    end
 end
 
 function ifMovingUp(param1::String, param2::String)

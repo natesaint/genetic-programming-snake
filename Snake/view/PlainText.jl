@@ -42,7 +42,7 @@ end
 function printArray(array::Array{Any, 1}, n::Int, m::Int)
 	for i = 1:n
 		for j = 1:m
-			print(array[i][j])
+			print(array[j][i])
 		end
 		println()
 	end
