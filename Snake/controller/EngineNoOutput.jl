@@ -23,11 +23,14 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 		#newMove = eval(Meta.parse(brain))
 		newMove = "right"
 		println(newMove)
+
 		if applyMove(currBoard, newMove) == -1
 			break
 		end
+
+		checkFood(b)
 		outputPlainText(currBoard)
-		sleep(1)
+		sleep(0.2)
 	end
 
 	return currBoard.score
@@ -53,7 +56,7 @@ function applyMove(b::Board, move::String)
 	end
 
 	# Check if new block is out of bounds
-	if newSnakeBlock.x <= 0 || newSnakeBlock.y <= 0 || newSnakeBlock.x >= b.width || newSnakeBlock.y >= b.height
+	if newSnakeBlock.x <= 0 || newSnakeBlock.y <= 0 || newSnakeBlock.x > b.width || newSnakeBlock.y > b.height
 		return -1
 	end
 
@@ -75,16 +78,32 @@ function applyMove(b::Board, move::String)
 	return 0
 end
 
-# Check if snake is colliding with self or wall
-function isGameOver(b::Board)
-end
-
 # Check if food is eaten
 function checkFood(b::Board)
+	if b.snake.snake[0].x == b.food.x && b.snake.snake[0].y == b.food.y
+		b.score = b.score + 1
+		genNewFood(b)
+	end
 end
 
 # Generate a new piece of food not in the position of the snake
 function genNewFood(b::Board)
+	newFood = Food(rand(1:b.width), rand(1:b.length))
+
+	while collidesWithSnake(b.snake, newFood.x, newFood.y)
+        newFood = Food(rand(1:b.width), rand(1:b.length))
+    end
+
+	b.food = newFood
+end
+
+function collidesWithSnake(s::Snake, x::Int, y::Int)
+	for sb in s.snake
+		if sb.x == x && sb.y == y
+			return true
+		end
+	end
+	return false
 end
 
 # Choose random direction

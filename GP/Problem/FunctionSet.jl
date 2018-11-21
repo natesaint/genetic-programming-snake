@@ -23,64 +23,60 @@ end
 # Functions that can be used in the function set
 #
 
-function connector(board::Board, param1::String, param2::String)
-    return "connector"
-end
-
-function ifFoodAhead(board::Board, param1::String, param2::String)
+function ifFoodAhead(param1::String, param2::String)
     return "ifFoodAhead"
 end
 
-function ifDangerAhead(board::Board, param1::String, param2::String)
+function ifDangerAhead(param1::String, param2::String)
     return "ifDangerAhead"
 end
 
-function ifDangerRight(board::Board, param1::String, param2::String)
+function ifDangerRight(param1::String, param2::String)
     return "ifDangerRight"
 end
 
-function ifDangerLeft(board::Board, param1::String, param2::String)
+function ifDangerLeft(param1::String, param2::String)
     return "ifDangerLeft"
 end
 
-function ifDangerTwoAhead(board::Board, param1::String, param2::String)
+function ifDangerTwoAhead(param1::String, param2::String)
     return "ifDangerTwoAhead"
 end
 
-function ifFoodUp(board::Board, param1::String, param2::String)
+function ifFoodUp(param1::String, param2::String)
     return "ifFoodUp"
 end
 
-function ifFoodRight(board::Board, param1::String, param2::String)
+function ifFoodRight(param1::String, param2::String)
     return "ifFoodRight"
 end
 
-function ifMovingUp(board::Board, param1::String, param2::String)
-    if board.move == "up"
+function ifMovingUp(param1::String, param2::String)
+    if currBoard.move == "up"
         return param1
     else
         return param2
     end
 end
 
-function ifMovingDown(board::Board, param1::String, param2::String)
-    if board.move == "down"
+function ifMovingDown(param1::String, param2::String)
+    if currBoard.move == "down"
         return param1
     else
         return param2
     end
 end
 
-function ifMovingLeft(board::Board, param1::String, param2::String)
-    if board.move == "left"
+function ifMovingLeft(param1::String, param2::String)
+    if currBoard.move == "left"
         return param1
     else
         return param2
     end
 end
 
-function ifMovingRight(board::Board, param1::String, param2::String)
-    if board.move == "right"
+function ifMovingRight(param1::String, param2::String)
+    if currBoard.move == "right"
         return param1
     else
         return param2
