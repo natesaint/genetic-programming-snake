@@ -2,13 +2,6 @@
 # Functionality to evaluate the fitness of an individual
 # or a set of individuals.
 #
-#include("../State/Individual.jl")
-#include("../../Snake/model/Board.jl")
-#include("../State/TreeNode.jl")
-#include("../../Snake/controller/EngineNoOutput.jl")
-#include("../../Snake/model/Food.jl")
-#include("../../Snake/model/Snake.jl")
-#include("../../Snake/model/SnakeBlock.jl")
 
 struct FitnessEval
     fitnessFunc::Function
@@ -28,8 +21,6 @@ end
 function evaluateFitness(fe::FitnessEval, snakeBrain::Individual)
     # Get the parsed string of the current individual being tested
     exprStr = parseTreeStr(snakeBrain.root)
-    #println(exprStr)
-    #println()
 
     # Setup initial snake game settings
     x = rand(1:30)
@@ -50,5 +41,4 @@ function evaluateFitness(fe::FitnessEval, snakeBrain::Individual)
     snake = Snake(snakeArr)
 
     return fe.fitnessFunc(exprStr, snake, food)
-    #return 800#900
 end

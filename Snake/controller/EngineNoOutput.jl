@@ -1,9 +1,9 @@
 #####################################################################
 # The controller used to run the Snake game when there is no output.
 #
-include("../model/Board.jl")
-include("../model/Snake.jl")
-include("../model/Block.jl")
+#include("../model/Board.jl")
+#include("../model/Snake.jl")
+#include("../model/Block.jl")
 
 currBoard = Board()
 
@@ -14,9 +14,9 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 	global currBoard = Board()
 	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
 
-	println()
-	println(currBoard)
-	println(brain)
+	#println()
+	#println(currBoard)
+	#println(brain)
 
 	# Game loop
 	while true
@@ -29,8 +29,8 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 		end
 
 		checkFood(currBoard)
-		outputPlainText(currBoard)
-		sleep(0.1)
+		#outputPlainText(currBoard)
+		#sleep(0.1)
 	end
 
 	return currBoard.score

@@ -2,12 +2,12 @@
 # Represent attributes stored as a part of the
 # current state of GP.
 #
-#include("./Population.jl")
 
 mutable struct State
     generation::Int
     currPopulation::Population
     bestOf::Individual
+    bestOfFitness::Int
 
     State(gen, currPop) = new(gen, currPop)
 end

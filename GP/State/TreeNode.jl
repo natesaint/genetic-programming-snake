@@ -1,7 +1,6 @@
 ########################################
 # Represent a node in a tree structure.
 #
-#include("../../Snake/model/Board.jl")
 
 abstract type TreeNode end
 

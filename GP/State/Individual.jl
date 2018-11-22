@@ -1,11 +1,6 @@
 #############################################
 # Represent an individual in the popualtion.
 #
-#include("./TreeNode.jl")
-#include("./InternalNode.jl")
-#include("./LeafNode.jl")
-#include("../Problem/FunctionSet.jl")
-#include("../Problem/TerminalSet.jl")
 
 struct Individual
     root::TreeNode

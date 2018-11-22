@@ -1,7 +1,6 @@
 ############################################
 # Function set used in Genetic Programming.
 #
-#include("../../Snake/model/Board.jl")
 
 struct FunctionSet
     functions::Array{Function}

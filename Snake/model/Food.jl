@@ -1,7 +1,7 @@
 ################################
 # Represents the food in Snake.
 #
-include("./Block.jl")
+#include("./Block.jl")
 
 mutable struct Food <: Block
 	x::Int

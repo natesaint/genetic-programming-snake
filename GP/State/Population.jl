@@ -1,10 +1,6 @@
 ############################################
 # Represent the population of a generation.
 #
-#include("./Individual.jl")
-#include("../Problem/FunctionSet.jl")
-#include("../Problem/TerminalSet.jl")
-#include("../../Snake/model/Board.jl")
 
 struct Population
     members::Array{Individual}
@@ -33,8 +29,8 @@ function createInitialPopulation(pop::Population, popSize::Int, funcSet::Functio
     for i = 1:popSize
         # Generate random function and create an internal node with it
         node = InternalNode(chooseRand(funcSet))
-        #genRandomIndividual(funcSet, termSet, node, 5, 0)
-        genRandomIndividual(funcSet, termSet, node, 2, 0)
+        genRandomIndividual(funcSet, termSet, node, 5, 0)
+        #genRandomIndividual(funcSet, termSet, node, 2, 0)
         indiv = Individual(node)
         addIndividual(pop, indiv)
     end

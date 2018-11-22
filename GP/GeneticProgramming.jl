@@ -1,20 +1,6 @@
 #################################################
 # Housing for the genetic programming algorithm.
 #
-#using Pkg
-#Pkg.add("StatsBase")
-#using StatsBase
-#include("./State/State.jl")
-#include("./System/System.jl")
-#include("./Problem/Problem.jl")
-#include("./Problem/FunctionSet.jl")
-#include("./Problem/TerminalSet.jl")
-#include("./System/Selection/Selection.jl")
-#include("./System/GeneticOperator/GeneticOperator.jl")
-#include("./System/GeneticOperator/Crossover.jl")
-#include("./System/GeneticOperator/Reproduction.jl")
-#include("./State/Population.jl")
-#include("./Problem/FitnessEval.jl")
 
 mutable struct GeneticProgramming
     system::System
@@ -90,6 +76,7 @@ function runGP(gp::GeneticProgramming)
 
     # Set best of to the first individual in the population with fitness 0
     gp.state.bestOf = gp.state.currPopulation.members[1]
+    gp.state.bestOfFitness = calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[1])
 
     # Main loop for genetic programming
     while gp.state.generation < gp.system.numGen
@@ -103,12 +90,11 @@ function runGP(gp::GeneticProgramming)
         println("Calculating fitness of each individual")
         while i <= gp.system.popSize
             # Calculate avg fitness over 5 runs
-            #println("Calculating average fitness")
+            print("\rIndividual #")
+            print(i)
+            print("/")
+            print(gp.system.popSize)
             push!(gp.state.currPopulation.fitness, calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[i]))
-            #print("Average fitness over ")
-            #print(gp.problem.eval.numRunsPerFitnessTest)
-            #print(" runs is ")
-            #println(gp.state.currPopulation.fitness[i])
 
             # Check termination criterion
             if (gp.problem.terminationCriterion(gp.state.currPopulation.fitness[i], 30, 30))
@@ -116,10 +102,22 @@ function runGP(gp::GeneticProgramming)
                 return gp.state.currPopulation.members[i]
             end
 
+            # Check if best of individual should be updated
+            if gp.state.currPopulation.fitness[i] >= gp.state.bestOfFitness
+                gp.state.bestOf = gp.state.currPopulation.members[i]
+                gp.state.bestOfFitness = gp.state.currPopulation.fitness[i]
+            end
+
             i = i + 1
         end
 
-        # Save the best of individual for this generation
+        println("Best individual of this generation:")
+        print("Fitness: ")
+        println(gp.state.bestOfFitness)
+        println(parseTreeStr(go.state.bestOf.root))
+        println()
+
+        # Save the best of individual of this generation TODO
 
         # Perform genetic operators to create a new population with evolve()
         evolve(gp)
@@ -133,6 +131,7 @@ end
 
 # Output the starting configuration of GP
 function printInitialConfig(gp::GeneticProgramming)
+    println()
     println("=====================")
     println("    Configuration    ")
     println("=====================")

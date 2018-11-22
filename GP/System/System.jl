@@ -2,8 +2,6 @@
 # Represent elements of the genetic programming system used
 # for running the GP algorithm for all problem domains.
 #
-#include("./Selection/Selection.jl")
-#include("./GeneticOperator/GeneticOperator.jl")
 
 mutable struct System
     popSize::Int
