@@ -94,6 +94,7 @@ function runGP(gp::GeneticProgramming)
             print(i)
             print("/")
             print(gp.system.popSize)
+            #visualizeTree(gp.state.currPopulation.members[i].root, 0)
             push!(gp.state.currPopulation.fitness, calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[i]))
 
             # Check termination criterion
@@ -111,10 +112,11 @@ function runGP(gp::GeneticProgramming)
             i = i + 1
         end
 
+        println()
         println("Best individual of this generation:")
         print("Fitness: ")
         println(gp.state.bestOfFitness)
-        println(parseTreeStr(go.state.bestOf.root))
+        println(parseTreeStr(gp.state.bestOf.root))
         println()
 
         # Save the best of individual of this generation TODO

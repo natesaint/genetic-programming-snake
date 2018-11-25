@@ -28,10 +28,15 @@ end
 function createInitialPopulation(pop::Population, popSize::Int, funcSet::FunctionSet, termSet::TerminalSet)
     for i = 1:popSize
         # Generate random function and create an internal node with it
+        cnt = Count(1)
         node = InternalNode(chooseRand(funcSet))
-        genRandomIndividual(funcSet, termSet, node, 5, 0)
-        #genRandomIndividual(funcSet, termSet, node, 2, 0)
+        genRandomIndividual(funcSet, termSet, node, 5, 0, cnt)
+        #genRandomIndividual(funcSet, termSet, node, 2, 0, cnt)
+        #println(cnt.count)
+        #visualizeTree(node, 0)
+        #println()
         indiv = Individual(node)
+        indiv.numNodes = cnt.count
         addIndividual(pop, indiv)
     end
 end

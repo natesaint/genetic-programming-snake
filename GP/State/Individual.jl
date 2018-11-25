@@ -2,20 +2,22 @@
 # Represent an individual in the popualtion.
 #
 
-struct Individual
+mutable struct Individual
     root::TreeNode
+    numNodes::Int
 
-    Individual(rootNode) = new(rootNode)
+    Individual(rootNode) = new(rootNode, 0)
 end
 
 # Recursively, generate random individual assuming it has a root already
-function genRandomIndividual(funcSet::FunctionSet, termSet::TerminalSet, currNode::TreeNode, maxDepth::Int, currDepth::Int)
+function genRandomIndividual(funcSet::FunctionSet, termSet::TerminalSet, currNode::TreeNode, maxDepth::Int, currDepth::Int, cnt::Count)
     # Terminate the recursive calls on leaf nodes since they have no children
     if typeof(currNode) != LeafNode
         # Generate new children for each parameter
         for m in methods(currNode.func)
             numArgs = length(m.sig.parameters)
             for i in 1:(numArgs - 1)
+                cnt.count = cnt.count + 1
                 generated = nothing
                 if (currDepth < maxDepth)
                     generated = genRanFuncTerm(funcSet::FunctionSet, termSet::TerminalSet)
@@ -28,7 +30,7 @@ function genRandomIndividual(funcSet::FunctionSet, termSet::TerminalSet, currNod
 
         # Recursively call each child
         for nd in currNode.children
-            genRandomIndividual(funcSet, termSet, nd, maxDepth, currDepth + 1)
+            genRandomIndividual(funcSet, termSet, nd, maxDepth, currDepth + 1, cnt)
         end
     end
 end

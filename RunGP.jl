@@ -8,18 +8,6 @@ using StatsBase
 include("./Snake/LoadSnake.jl")
 include("./GP/LoadGP.jl")
 println("Done loading and including files")
-#include("./GP/GeneticProgramming.jl")
-#include("./GP/System/System.jl")
-#include("./GP/System/Selection/Selection.jl")
-#include("./GP/System/Selection/FitnessProportionalSelection.jl")
-#include("./GP/System/Selection/TournamentSelection.jl")
-#include("./GP/System/GeneticOperator/GeneticOperator.jl")
-#include("./GP/System/GeneticOperator/Crossover.jl")
-#include("./GP/System/GeneticOperator/Reproduction.jl")
-#include("./Snake/controller/EngineNoOutput.jl")
-#include("./GP/Problem/FunctionSet.jl")
-#include("./GP/Problem/TerminalSet.jl")
-#include("./GP/Problem/TerminationCriterion.jl")
 
 gp = GeneticProgramming()
 
@@ -35,7 +23,8 @@ ops = GeneticOperator[]
 push!(ops, Crossover(0.90))
 push!(ops, Reproduction(0.10))
 
-createSystem(gp, 500, 200, strat, ops)
+createSystem(gp, 10000, 200, strat, ops)
+#createSystem(gp, 10, 20, strat, ops)
 #createSystem(gp, 2, 3, strat, ops)
 
 #
@@ -72,5 +61,39 @@ createProblem(gp, playGameNoOutput, 5, functionSet, terminalSet, isMaxScoreRecta
 #
 createInitState(gp)
 
+#
+# Run GP - save best of individual
+#
 bestOf = runGP(gp)
 bestOfStr = parseTreeStr(bestOf.root)
+
+#
+# Run the best of individual
+#
+
+# Setup initial snake game settings
+sx = rand(1:30)
+sy = rand(1:30)
+fa = rand(1:30)
+fb = rand(1:30)
+
+# Make sure food and snake don't start in same spot
+while sx == fa && sy == fb
+    fa = rand(1:30)
+    fb = rand(1:30)
+end
+
+food = Food(fa, fb)
+snakeBlock = SnakeBlock(sx, sy)
+snakeArr = SnakeBlock[]
+push!(snakeArr, snakeBlock)
+snake = Snake(snakeArr)
+
+finalScore = playGameOutput(bestOfStr, snake, food)
+
+println("Best individual: ")
+println(bestOfStr)
+println()
+
+print("Final score:")
+println(finalScore)

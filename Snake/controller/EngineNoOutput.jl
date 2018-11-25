@@ -9,10 +9,11 @@ currBoard = Board()
 
 # Function to play Snake, the snake brain is passed to the function in the
 # place of deciding which direction to move in.
-function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30)
+function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=200)
 	# Start at some starting board
 	global currBoard = Board()
 	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
+	numWithoutFood = 0
 
 	#println()
 	#println(currBoard)
@@ -28,7 +29,15 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 			break
 		end
 
-		checkFood(currBoard)
+		if checkFood(currBoard) == 0
+			if numWithoutFood > stopAt
+				break
+			end
+			numWithoutFood = numWithoutFood + 1
+		else
+			numWithoutFood = 0
+		end
+
 		#outputPlainText(currBoard)
 		#sleep(0.1)
 	end
@@ -66,6 +75,7 @@ function applyMove(b::Board, move::String)
 	return 0
 end
 
+# Create a new head of the snake based on the move and current head position
 function createNewSnakeBlock(b::Board, move::String)
 	newSnakeBlock = SnakeBlock(-1, -1)
 	if move == "up"
@@ -84,6 +94,7 @@ function createNewSnakeBlock(b::Board, move::String)
 	return newSnakeBlock
 end
 
+# Update the position of the snake based on the move
 function updateSnakePos(b::Board, move::String, newSnakeBlock::SnakeBlock)
 	if length(b.snake.snake) != 1
 		for i in length(b.snake.snake):-1:2
@@ -100,7 +111,9 @@ function checkFood(b::Board)
 		newSnakeBlock = b.snake.snake[length(b.snake.snake)]
 		push!(b.snake.snake, newSnakeBlock)
 		genNewFood(b)
+		return 1
 	end
+	return 0
 end
 
 # Generate a new piece of food not in the position of the snake

@@ -4,6 +4,7 @@
 include("./Problem/FunctionSet.jl")
 include("./Problem/TerminalSet.jl")
 include("./State/TreeNode.jl")
+include("./State/Count.jl")
 include("./State/Individual.jl")
 include("./State/InternalNode.jl")
 include("./State/LeafNode.jl")

@@ -8,26 +8,37 @@
 
 # Function to play Snake, the snake brain is passed to the function in the
 # place of deciding which direction to move in.
-function playGameOutput(brain::Function, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30)
+function playGameOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=200)
 	# Start at some starting board
 	global currBoard = Board()
 	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
+	numWithoutFood = 0
 
-	println()
-	println(currBoard)
-	println(brain)
+	#println()
+	#println(currBoard)
+	#println(brain)
 
 	# Game loop
 	while true
 		newMove = eval(Meta.parse(brain))
+		#newMove = "up"
+		#newMove = chooseRandDirection()
 
 		if applyMove(currBoard, newMove) == -1
 			break
 		end
 
-		checkFood(currBoard)
+		if checkFood(currBoard) == 0
+			if numWithoutFood > stopAt
+				break
+			end
+			numWithoutFood = numWithoutFood + 1
+		else
+			numWithoutFood = 0
+		end
+
 		outputPlainText(currBoard)
-		sleep(0.1)
+		sleep(0.2)
 	end
 
 	return currBoard.score
