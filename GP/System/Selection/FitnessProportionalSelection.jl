@@ -15,8 +15,8 @@ function selectIndividual(strat::FitnessProportionalSelection, pop::Population)
     end
 
     for x in pop.fitness
-        push!(weights, x / s)
+        push!(weights, (x + 1) / (s + length(pop.members)))
     end
 
-    return wsample(pop.members, weights)
+    return deepcopy(wsample(pop.members, weights))
 end

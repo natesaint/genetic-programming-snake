@@ -38,7 +38,7 @@ function playGameOutput(brain::String, initialSnake::Snake, initialFood::Block, 
 		end
 
 		outputPlainText(currBoard)
-		sleep(0.2)
+		sleep(0.1)
 	end
 
 	return currBoard.score

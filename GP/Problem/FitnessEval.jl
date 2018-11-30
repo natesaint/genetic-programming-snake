@@ -10,11 +10,12 @@ end
 
 # Run the fitness test numRuns amount of times
 function calculateAvgFitness(fe::FitnessEval, numRuns::Int, snakeBrain::Individual)
-    fitSum = 0
-    for i in 1:1#fe.numRunsPerFitnessTest
-        fitSum = fitSum + evaluateFitness(fe, snakeBrain)
-    end
-    return convert(Int64, round(fitSum / 1))#fe.numRunsPerFitnessTest))
+    #fitSum = 0
+    #for i in 1:fe.numRunsPerFitnessTest
+    #    fitSum = fitSum + evaluateFitness(fe, snakeBrain)
+    #end
+    #return convert(Int64, round(fitSum / 1))#fe.numRunsPerFitnessTest))
+    return evaluateFitness(fe, snakeBrain)
 end
 
 # Evaluate the fitness by getting the expression from the tree and checking it

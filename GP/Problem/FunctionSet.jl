@@ -22,6 +22,15 @@ end
 # Functions that can be used in the function set
 #
 
+function snakeInBlock(x::Int, y::Int)
+    for sb in currBoard.snake.snake
+        if sb.x == x && sb.y == y
+            return true
+        end
+    end
+    return false
+end
+
 function ifFoodAhead(param1::String, param2::String)
     if currBoard.move == "up" && currBoard.food.x == currBoard.snake.snake[1].x && currBoard.food.y < currBoard.snake.snake[1].y
         return param1
@@ -36,14 +45,28 @@ function ifFoodAhead(param1::String, param2::String)
     end
 end
 
+function ifFoodBehind(param1::String, param2::String)
+    if currBoard.move == "up" && currBoard.food.x == currBoard.snake.snake[1].x && currBoard.food.y > currBoard.snake.snake[1].y
+        return param1
+    elseif currBoard.move == "down" && currBoard.food.x == currBoard.snake.snake[1].x && currBoard.food.y < currBoard.snake.snake[1].y
+        return param1
+    elseif currBoard.move == "left" && currBoard.food.x > currBoard.snake.snake[1].x && currBoard.food.y == currBoard.snake.snake[1].y
+        return param1
+    elseif currBoard.move == "right" && currBoard.food.x < currBoard.snake.snake[1].x && currBoard.food.y == currBoard.snake.snake[1].y
+        return param1
+    else
+        return param2
+    end
+end
+
 function ifDangerAhead(param1::String, param2::String)
-    if currBoard.move == "up" && currBoard.snake.snake[1].y - 1 == 1
+    if currBoard.move == "up" && (currBoard.snake.snake[1].y - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y - 1))
         return param1
-    elseif currBoard.move == "down" && currBoard.snake.snake[1].y + 1 == currBoard.height + 1
+    elseif currBoard.move == "down" && (currBoard.snake.snake[1].y + 1 >= currBoard.height + 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y + 1))
         return param1
-    elseif currBoard.move == "left" && currBoard.snake.snake[1].x - 1 == 1
+    elseif currBoard.move == "left" && (currBoard.snake.snake[1].x - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x - 1, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "right" && currBoard.snake.snake[1].x + 1 == currBoard.width + 1
+    elseif currBoard.move == "right" && (currBoard.snake.snake[1].x + 1 >= currBoard.width + 1 || snakeInBlock(currBoard.snake.snake[1].x + 1, currBoard.snake.snake[1].y))
         return param1
     else
         return param2
@@ -51,13 +74,13 @@ function ifDangerAhead(param1::String, param2::String)
 end
 
 function ifDangerRight(param1::String, param2::String)
-    if currBoard.move == "up" && currBoard.snake.snake[1].x + 1 == currBoard.width + 1
+    if currBoard.move == "up" && (currBoard.snake.snake[1].x + 1 >= currBoard.width + 1 || snakeInBlock(currBoard.snake.snake[1].x + 1, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "down" && currBoard.snake.snake[1].x - 1 == 1
+    elseif currBoard.move == "down" && (currBoard.snake.snake[1].x - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x - 1, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "left" && currBoard.snake.snake[1].y - 1 == 1
+    elseif currBoard.move == "left" && (currBoard.snake.snake[1].y - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y - 1))
         return param1
-    elseif currBoard.move == "right" && currBoard.snake.snake[1].y + 1 == currBoard.height + 1
+    elseif currBoard.move == "right" && (currBoard.snake.snake[1].y + 1 >= currBoard.height + 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y + 1))
         return param1
     else
         return param2
@@ -65,13 +88,13 @@ function ifDangerRight(param1::String, param2::String)
 end
 
 function ifDangerLeft(param1::String, param2::String)
-    if currBoard.move == "up" && currBoard.snake.snake[1].x - 1 == 1
+    if currBoard.move == "up" && (currBoard.snake.snake[1].x - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x - 1, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "down" && currBoard.snake.snake[1].x + 1 == currBoard.width + 1
+    elseif currBoard.move == "down" && (currBoard.snake.snake[1].x + 1 >= currBoard.width + 1 || snakeInBlock(currBoard.snake.snake[1].x + 1, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "left" && currBoard.snake.snake[1].y + 1 == currBoard.height + 1
+    elseif currBoard.move == "left" && (currBoard.snake.snake[1].y + 1 >= currBoard.height + 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y + 1))
         return param1
-    elseif currBoard.move == "right" && currBoard.snake.snake[1].y - 1 == 1
+    elseif currBoard.move == "right" && (currBoard.snake.snake[1].y - 1 <= 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y - 1))
         return param1
     else
         return param2
@@ -79,13 +102,13 @@ function ifDangerLeft(param1::String, param2::String)
 end
 
 function ifDangerTwoAhead(param1::String, param2::String)
-    if currBoard.move == "up" && currBoard.snake.snake[1].y - 2 == 1
+    if currBoard.move == "up" && (currBoard.snake.snake[1].y - 2 <= 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y - 2))
         return param1
-    elseif currBoard.move == "down" && currBoard.snake.snake[1].y + 2 == currBoard.height + 1
+    elseif currBoard.move == "down" && (currBoard.snake.snake[1].y + 2 >= currBoard.height + 1 || snakeInBlock(currBoard.snake.snake[1].x, currBoard.snake.snake[1].y + 2))
         return param1
-    elseif currBoard.move == "left" && currBoard.snake.snake[1].x - 2 == 1
+    elseif currBoard.move == "left" && (currBoard.snake.snake[1].x - 2 <= 1 || snakeInBlock(currBoard.snake.snake[1].x - 2, currBoard.snake.snake[1].y))
         return param1
-    elseif currBoard.move == "right" && currBoard.snake.snake[1].x + 2 == currBoard.width + 1
+    elseif currBoard.move == "right" && (currBoard.snake.snake[1].x + 2 >= currBoard.width + 1 || snakeInBlock(currBoard.snake.snake[1].x + 2, currBoard.snake.snake[1].y))
         return param1
     else
         return param2
@@ -100,7 +123,25 @@ function ifFoodUp(param1::String, param2::String)
     end
 end
 
+# NEW
+function ifFoodDown(param1::String, param2::String)
+    if currBoard.food.y > currBoard.snake.snake[1].y
+        return param1
+    else
+        return param2
+    end
+end
+
 function ifFoodRight(param1::String, param2::String)
+    if currBoard.food.x > currBoard.snake.snake[1].x
+        return param1
+    else
+        return param2
+    end
+end
+
+# NEW
+function ifFoodLeft(param1::String, param2::String)
     if currBoard.food.x > currBoard.snake.snake[1].x
         return param1
     else

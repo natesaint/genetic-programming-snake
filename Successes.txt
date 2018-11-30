@@ -1,0 +1,100 @@
+FITNESS FUNCTION JUST SCORE
+
+ifDangerAhead(ifFoodRight(ifDangerAhead(ifDangerLeft(ifFoodRight(ifDangerAhead(moveLeft(), moveLeft()), moveRight()), ifFoodUp(ifMovingLeft(moveDown(), moveRight()), ifFoodRight(moveDown(), moveLeft()))), ifMovingDown(ifMovingLeft(ifDangerRight(moveDown(), moveUp()), ifMovingRight(moveUp(), moveRight())), moveRight())), ifMovingDown(ifFoodAhead(ifDangerRight(ifFoodRight(moveDown(), moveLeft()), ifDangerRight(moveDown(), moveRight())), ifMovingUp(moveUp(), ifMovingRight(moveLeft(), moveLeft()))), ifDangerTwoAhead(ifMovingRight(ifDangerAhead(moveRight(), moveUp()), moveUp()), ifDangerRight(ifFoodRight(moveRight(), moveUp()), ifMovingLeft(moveDown(), moveUp()))))), ifMovingRight(ifDangerTwoAhead(ifMovingRight(ifDangerAhead(ifMovingUp(moveLeft(), moveLeft()), ifMovingLeft(moveLeft(), moveRight())), ifFoodRight(ifDangerRight(moveDown(), moveLeft()), ifFoodAhead(moveRight(), moveLeft()))), ifMovingDown(ifMovingRight(ifMovingRight(moveUp(), moveUp()), ifFoodAhead(moveUp(), moveLeft())), ifMovingRight(moveLeft(), ifFoodRight(moveRight(), moveRight())))), ifMovingDown(ifDangerAhead(ifDangerTwoAhead(ifDangerRight(moveUp(), moveLeft()), ifMovingLeft(moveUp(), moveLeft())), moveDown()), ifFoodRight(ifFoodUp(ifFoodUp(moveUp(), moveUp()), ifDangerRight(moveDown(), moveRight())), moveLeft()))))
+SCORE:48
+Pop = 500, Gen = 200, InitTreeSize = 5, MaxTreeSize = 12,
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
+SelectionStrat = TournamentSelection
+Crossover = 0.90
+Reproduction = 0.10
+
+
+ifFoodUp(ifFoodRight(moveUp(), ifFoodUp(ifDangerTwoAhead(moveUp(), ifMovingUp(ifMovingRight(moveUp(), moveLeft()), ifMovingDown(moveLeft(), moveLeft()))), ifDangerTwoAhead(ifMovingDown(ifMovingUp(moveDown(), moveLeft()), ifMovingRight(ifFoodAhead(ifFoodAhead(ifDangerLeft(moveUp(), moveDown()), ifMovingRight(moveDown(), moveRight())), moveUp()), moveDown())), ifFoodUp(ifDangerRight(moveLeft(), moveLeft()), ifFoodAhead(ifFoodUp(moveUp(), moveUp()), ifDangerLeft(moveRight(), moveDown())))))), ifFoodAhead(ifMovingRight(ifDangerRight(ifFoodAhead(moveDown(), ifMovingRight(moveUp(), moveLeft())), ifDangerAhead(moveRight(), moveRight())), ifFoodAhead(moveDown(), ifFoodAhead(ifMovingLeft(moveRight(), moveDown()), ifMovingDown(ifMovingUp(moveDown(), moveLeft()), ifMovingRight(moveRight(), moveDown()))))), ifDangerLeft(ifMovingRight(ifFoodAhead(ifDangerLeft(moveLeft(), moveDown()), ifMovingRight(moveDown(), ifDangerTwoAhead(ifFoodRight(ifMovingLeft(moveLeft(), moveDown()), moveDown()), moveDown()))), ifDangerLeft(moveDown(), ifMovingRight(moveLeft(), moveRight()))), ifMovingLeft(ifDangerRight(ifDangerTwoAhead(moveRight(), moveDown()), moveDown()), ifDangerTwoAhead(ifDangerTwoAhead(moveRight(), moveRight()), ifDangerAhead(moveDown(), moveRight()))))))
+SCORE:35
+Pop = 500, Gen = 200, InitTreeSize = 5, MaxTreeSize = 12
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
+SelectionStrat = TournamentSelection
+Crossover = 0.90
+Reproduction = 0.10
+
+ifFoodUp(ifFoodRight(ifMovingLeft(ifFoodAhead(moveDown(), ifFoodRight(moveRight(), moveDown())), ifDangerLeft(moveRight(), moveRight())), moveUp()), ifFoodRight(ifDangerLeft(ifFoodAhead(ifDangerLeft(ifDangerRight(moveUp(), moveUp()), moveRight()), moveRight()), ifDangerLeft(moveLeft(), ifDangerLeft(moveLeft(), moveDown()))), ifMovingLeft(ifFoodRight(ifDangerTwoAhead(moveRight(), moveLeft()), ifFoodAhead(ifMovingLeft(moveLeft(), moveUp()), ifFoodRight(moveUp(), moveLeft()))), moveLeft())))
+SCORE:36
+Pop = 500, Gen = 200, InitTreeSize = 5, MaxTreeSize = 7
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
+SelectionStrat = TournamentSelection
+Crossover = 0.90
+Reproduction = 0.10
+
+ifFoodLeft(ifFoodDown(ifFoodDown(ifDangerTwoAhead(moveDown(), ifFoodDown(ifDangerTwoAhead(moveDown(), moveDown()), moveRight())), ifFoodDown(ifDangerTwoAhead(moveLeft(), moveDown()), ifDangerRight(moveRight(), moveLeft()))), ifFoodUp(moveUp(), ifFoodUp(ifDangerRight(ifDangerRight(moveRight(), moveLeft()), moveUp()), moveRight()))), ifFoodUp(moveUp(), ifFoodDown(ifFoodUp(ifDangerRight(moveRight(), moveRight()), moveDown()), ifFoodLeft(moveRight(), moveLeft()))))
+SCORE:53
+Pop = 500, Gen = 200, InitTreeSize = 5, MaxTreeSize = 7
+NEW FUNCTION SET added
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifFoodLeft)
+push!(functionSet, ifFoodDown)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
+SelectionStrat = TournamentSelection
+Crossover = 0.90
+Reproduction = 0.10
+
+
+NEW FITNESS FUNCTION
+ifFoodDown(ifFoodUp(ifFoodUp(moveDown(), moveRight()), ifFoodUp(ifFoodRight(moveRight(), moveLeft()), moveDown())), ifFoodUp(ifFoodUp(ifFoodUp(moveUp(), moveLeft()), moveUp()), ifFoodUp(ifFoodRight(moveDown(), moveUp()), ifFoodRight(moveRight(), moveLeft()))))
+SCORE:53
+Pop = 500, Gen = 200, InitTreeSize = 5, MaxTreeSize = 5
+NEW FUNCTION SET added
+push!(functionSet, ifFoodAhead)
+push!(functionSet, ifDangerAhead)
+push!(functionSet, ifDangerRight)
+push!(functionSet, ifDangerLeft)
+push!(functionSet, ifDangerTwoAhead)
+push!(functionSet, ifFoodUp)
+push!(functionSet, ifFoodRight)
+push!(functionSet, ifFoodLeft)
+push!(functionSet, ifFoodDown)
+push!(functionSet, ifMovingUp)
+push!(functionSet, ifMovingDown)
+push!(functionSet, ifMovingLeft)
+push!(functionSet, ifMovingRight)
+SelectionStrat = TournamentSelection
+Crossover = 0.90
+Reproduction = 0.10

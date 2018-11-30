@@ -51,6 +51,7 @@ function evolve(gp::GeneticProgramming)
     while getNumIndividuals(newPop) < gp.system.popSize
         # With sampling, choose the genetic operation to use
         selectedOp = wsample(gp.system.geneticOperators, weights)
+        #println(selectedOp)
 
         # Make sure crossover doesn't happen if only one more indiviudal can fit
         if (gp.system.popSize - 1 == getNumIndividuals(newPop))
@@ -60,7 +61,7 @@ function evolve(gp::GeneticProgramming)
         end
     end
 
-    gp.state.currPopulation = newPop
+    gp.state.currPopulation = deepcopy(newPop)
 end
 
 # Run the GP process looping through the procedure until the maximum number
@@ -75,8 +76,8 @@ function runGP(gp::GeneticProgramming)
     println("Initial population created\n")
 
     # Set best of to the first individual in the population with fitness 0
-    gp.state.bestOf = gp.state.currPopulation.members[1]
-    gp.state.bestOfFitness = calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[1])
+    gp.state.bestOf = deepcopy(gp.state.currPopulation.members[1])
+    gp.state.bestOfFitness = calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[1]).score
 
     # Main loop for genetic programming
     while gp.state.generation < gp.system.numGen
@@ -98,22 +99,22 @@ function runGP(gp::GeneticProgramming)
             push!(gp.state.currPopulation.fitness, calculateAvgFitness(gp.problem.eval, gp.problem.eval.numRunsPerFitnessTest, gp.state.currPopulation.members[i]))
 
             # Check termination criterion
-            if (gp.problem.terminationCriterion(gp.state.currPopulation.fitness[i], 30, 30))
+            if (gp.problem.terminationCriterion(gp.state.currPopulation.fitness[i].score, 30, 30))
                 println("Termination criterion satisfied - returning 'best of' individual")
                 return gp.state.currPopulation.members[i]
             end
 
             # Check if best of individual should be updated
-            if gp.state.currPopulation.fitness[i] >= gp.state.bestOfFitness
-                gp.state.bestOf = gp.state.currPopulation.members[i]
-                gp.state.bestOfFitness = gp.state.currPopulation.fitness[i]
+            if gp.state.currPopulation.fitness[i].score >= gp.state.bestOfFitness
+                gp.state.bestOf = deepcopy(gp.state.currPopulation.members[i])
+                gp.state.bestOfFitness = gp.state.currPopulation.fitness[i].score
             end
 
             i = i + 1
         end
 
         println()
-        println("Best individual of this generation:")
+        println("Best individual after this generation:")
         print("Fitness: ")
         println(gp.state.bestOfFitness)
         println(parseTreeStr(gp.state.bestOf.root))
@@ -125,7 +126,6 @@ function runGP(gp::GeneticProgramming)
         evolve(gp)
 
         incrementGeneration(gp.state)
-        println()
     end
 
     return gp.state.bestOf

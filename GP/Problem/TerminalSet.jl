@@ -23,25 +23,46 @@ end
 #
 
 function moveUp()
-    #println("moveUp")
-    #println(board)
     return "up"
 end
 
 function moveDown()
-    #println("moveDown")
-    #println(board)
     return "down"
 end
 
 function moveLeft()
-    #println("moveLeft")
-    #println(board)
     return "left"
 end
 
 function moveRight()
-    #println("moveRight")
-    #println(board)
     return "right"
+end
+
+# New terminal set
+function forward()
+    return currBoard.move
+end
+
+function turnLeft()
+    if currBoard.move == "up"
+        return "left"
+    elseif currBoard.move == "down"
+        return "right"
+    elseif currBoard.move == "left"
+        return "down"
+    else
+        return "up"
+    end
+end
+
+function turnRight()
+    if currBoard.move == "up"
+        return "right"
+    elseif currBoard.move == "down"
+        return "left"
+    elseif currBoard.move == "left"
+        return "up"
+    else
+        return "down"
+    end
 end

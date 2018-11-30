@@ -11,46 +11,41 @@ end
 function geneticOperation(c::Crossover, state::State, system::System, newPop::Population)
     #println("Performing crossover")
     # Select two individuals
-    indivOne = selectIndividual(system.selectionStrategy, state.currPopulation)
-    indivTwo = selectIndividual(system.selectionStrategy, state.currPopulation)
+    indivOne = deepcopy(selectIndividual(system.selectionStrategy, state.currPopulation))
+    indivTwo = deepcopy(selectIndividual(system.selectionStrategy, state.currPopulation))
 
-    #println("indiv selected")
+    #println("Indiv ONE")
+    #printIndividual(indivOne)
+    #println("Indiv TWO")
+    #printIndividual(indivTwo)
 
     if indivOne.numNodes < 2 || indivTwo.numNodes < 2
         return
     end
 
-    #println("comparison happened")
-
     x = Count(0)
     y = Count(0)
-    countNodes(indivOne.root, x) # GETTING A SEGFAULT IN countNodes
+    countNodes(indivOne.root, x)
     countNodes(indivTwo.root, y)
     countOne = x.count
     countTwo = y.count
 
-    #println("counted nodes")
-
     # Select random node that isn't the first one in each tree
-    posOne = rand(2:countOne)#indivOne.numNodes)
+    posOne = rand(2:countOne)
     posTwo = rand(2:countTwo)
-    foundOne = Found(InternalNode(moveUp))## THIS IS WHERE THE NODE WITHOUT ARGS IS BEING ADDED. I THINK THE COUNT FUNCTION IS WRONG
+    foundOne = Found(InternalNode(moveUp))
     foundTwo = Found(InternalNode(moveUp))
     getNodeAt(indivOne.root, posOne, Count(0), foundOne)
     getNodeAt(indivTwo.root, posTwo, Count(0), foundTwo)
 
-    #println("NEWMAN+++++++++++++++++++++++++")
-    #println(countOne)
-    #visualizeTree(indivOne.root, 0)
+    #print("\n\nPOS ONE")
     #println(posOne)
-    #visualizeTree(foundOne.node, 0)
-    #println()
-
-    #println(countTwo)
-    #visualizeTree(indivTwo.root, 0)
+    #print("POS TWO")
     #println(posTwo)
+    #println("\nFOUND ONE")
+    #visualizeTree(foundOne.node, 0)
+    #println("FOUND TWO")
     #visualizeTree(foundTwo.node, 0)
-    #println()
 
     # Swap the branches that were selected
     newIndivOne = deepcopy(indivOne)
@@ -59,58 +54,66 @@ function geneticOperation(c::Crossover, state::State, system::System, newPop::Po
     arrTwo = TreeNode[]
     convertTree(newIndivOne.root, arrOne)
     convertTree(newIndivTwo.root, arrTwo)
-    #println("Testing array")
-    #println(length(arrOne))
-    #println(arrOne)
-    #visualizeTree(newIndivOne.root, 0)
-    #println(posOne)
-    #visualizeTree(foundTwo.node, 0)
-    #println()
-    #println("Before first insert")
-    #insertBranch(newIndivOne.root, foundTwo.node, posOne, Count(1))
-    rootOne = insertBranch(arrOne, foundTwo.node, posOne)
-    rootTwo = insertBranch(arrTwo, foundOne.node, posTwo)
-    newIndivOne.root = rootOne
-    newIndivTwo.root = rootTwo
-    #println(rootOne)
-    #visualizeTree(rootOne, 0)
 
-    #println("After first insert")
+    # Insert new branches
+    rootOne = deepcopy(insertBranch(arrOne, foundTwo.node, posOne))
+    rootTwo = deepcopy(insertBranch(arrTwo, foundOne.node, posTwo))
+    newIndivOne.root = deepcopy(rootOne)
+    newIndivTwo.root = deepcopy(rootTwo)
+
+    #println("\nROOT ONE") # THE CROSSOVER SWAP DOESN"T WORK AT ALL WHEN THE SELECTED ELEMENT IS AN INTERNAL NODE
     #visualizeTree(newIndivOne.root, 0)
-    #println()
-    #indivOne.root.children[0]
-    #println("Before second insert")
+    #println("ROOT TWO")
     #visualizeTree(newIndivTwo.root, 0)
 
-    #insertBranch(newIndivTwo.root, foundOne.node, posTwo, Count(1))
+    # Check if it is at the limit
+    x = getDepth(newIndivOne.root)
+    y = getDepth(newIndivTwo.root)
 
-    #println("After second insert")
+    #println("NEW DEPTHS")
+    #println(x)
+    #println(y)
 
-    #visualizeTree(newIndivOne.root, 0)
-    #println()
-    #visualizeTree(newIndivTwo.root, 0)
-    #println()
-    #indivOne.root.children[0]
-
-    #######visualizeTree(newIndivOne.root, 0)
-    #######println()
-    #######visualizeTree(newIndivTwo.root, 0)
-    #######println()
+    if x > 5 || y > 5
+        return
+    end
 
     #println("before insert")
     #println(getNumIndividuals(newPop))
-    addIndividual(newPop, newIndivOne)
-    addIndividual(newPop, newIndivTwo)
-    #println(getNumIndividuals(newPop))
+    #for indivi in newPop.members
+    #    printIndividual(indivi)
+    #end
+    addIndividual(newPop, deepcopy(newIndivOne))
+    addIndividual(newPop, deepcopy(newIndivTwo))
     #println("after insert")
+    #println(getNumIndividuals(newPop))
+    #for indivi in newPop.members
+    #    printIndividual(indivi)
+    #end
+end
+
+# Get the depth of a tree
+function getDepth(node::TreeNode)
+    if typeof(node) == InternalNode
+        leftDepth = getDepth(node.children[1])
+        rightDepth = getDepth(node.children[2])
+
+        if leftDepth > rightDepth
+            return leftDepth + 1
+        else
+            return rightDepth + 1
+        end
+    else
+        return 1
+    end
 end
 
 # Convert a branch to an array representation
 function convertTree(node::TreeNode, arr::Array{TreeNode})
     if typeof(node) == InternalNode
-        push!(arr, InternalNode(node.func))
+        push!(arr, deepcopy(InternalNode(node.func)))
     else
-        push!(arr, LeafNode(node.func))
+        push!(arr, deepcopy(LeafNode(node.func)))
     end
 
     if typeof(node) == InternalNode
@@ -121,11 +124,14 @@ function convertTree(node::TreeNode, arr::Array{TreeNode})
 end
 
 # Insert a new branch into an individual at a desired position
-function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)#node::TreeNode, newBranch::TreeNode, target::Int, cnt::Count)
+function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)
     # Run through the array backwards and create the new tree
     i = length(arr)
     while i > 0
-        if typeof(arr[i]) == InternalNode# && i != target
+        #println(i)
+        #printArray(arr)
+
+        if typeof(arr[i]) == InternalNode
             numArgs = 0
             for m in methods(arr[i].func)
                 numArgs = length(m.sig.parameters) - 1
@@ -139,16 +145,8 @@ function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)#no
                     k = k + 1
                 end
 
-                # Set the array at the index to the new node
-                #println("Array[target]")
-                #println(target)
-                #println(arr[target])
-                arr[target] = newBranch
-                #println("Array[target] new branch")
-                #println(arr[target])
+                arr[target] = deepcopy(newBranch)
             else
-                #println("i FOUND")
-                #println(i)
                 k = 0
 
                 # Add the children
@@ -156,7 +154,7 @@ function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)#no
                 while k < numArgs
                     j = j + 1
                     toAdd = deepcopy(arr[j])
-                    push!(arr[i].children, toAdd)
+                    push!(arr[i].children, deepcopy(toAdd))
                     k = k + 1
                 end
 
@@ -167,14 +165,22 @@ function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)#no
                     k = k + 1
                 end
             end
+        else
+            if i == target
+                arr[target] = deepcopy(newBranch)
+            end
         end
         i = i - 1
     end
 
-    #println("SIZE OF ARRAY")
-    #println(length(arr))
-
     return arr[1]
+end
+
+# print the array for debug purposes
+function printArray(arr::Array{TreeNode})
+    for i in arr
+        println(i.func)
+    end
 end
 
 # Get the node at a position in a tree
@@ -186,7 +192,7 @@ function getNodeAt(node::TreeNode, target::Int, cnt::Count, found::Found)
     end
 
     if cnt.count == target
-        found.node = node
+        found.node = deepcopy(node)
         return
     end
 

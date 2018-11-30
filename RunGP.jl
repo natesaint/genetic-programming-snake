@@ -16,14 +16,15 @@ gp = GeneticProgramming()
 #
 
 # Selection strategy to use
-strat = FitnessProportionalSelection()
+#strat = FitnessProportionalSelection()
+strat = TournamentSelection()
 
 # Genetic operators to use in gp
 ops = GeneticOperator[]
 push!(ops, Crossover(0.90))
 push!(ops, Reproduction(0.10))
 
-createSystem(gp, 10000, 200, strat, ops)
+createSystem(gp, 500, 200, strat, ops)
 #createSystem(gp, 10, 20, strat, ops)
 #createSystem(gp, 2, 3, strat, ops)
 
@@ -35,12 +36,15 @@ createSystem(gp, 10000, 200, strat, ops)
 functionSet = Function[]
 #push!(functionSet, connector)
 push!(functionSet, ifFoodAhead)
+push!(functionSet, ifFoodBehind)
 push!(functionSet, ifDangerAhead)
 push!(functionSet, ifDangerRight)
 push!(functionSet, ifDangerLeft)
 push!(functionSet, ifDangerTwoAhead)
 push!(functionSet, ifFoodUp)
 push!(functionSet, ifFoodRight)
+push!(functionSet, ifFoodLeft)
+push!(functionSet, ifFoodDown)
 push!(functionSet, ifMovingUp)
 push!(functionSet, ifMovingDown)
 push!(functionSet, ifMovingLeft)
@@ -49,10 +53,13 @@ push!(functionSet, ifMovingRight)
 
 # Add terminals
 terminalSet = Function[]
-push!(terminalSet, moveUp)
-push!(terminalSet, moveDown)
-push!(terminalSet, moveLeft)
-push!(terminalSet, moveRight)
+#push!(terminalSet, moveUp)
+#push!(terminalSet, moveDown)
+#push!(terminalSet, moveLeft)
+#push!(terminalSet, moveRight)
+push!(terminalSet, forward)
+push!(terminalSet, turnLeft)
+push!(terminalSet, turnRight)
 
 createProblem(gp, playGameNoOutput, 5, functionSet, terminalSet, isMaxScoreRectangleBoard)
 

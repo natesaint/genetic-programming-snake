@@ -9,5 +9,5 @@ end
 
 # Add the selected individual to the new population
 function geneticOperation(r::Reproduction, state::State, system::System, newPop::Population)
-    addIndividual(newPop, selectIndividual(system.selectionStrategy, state.currPopulation))
+    addIndividual(newPop, deepcopy(selectIndividual(system.selectionStrategy, state.currPopulation)))
 end

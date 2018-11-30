@@ -4,14 +4,14 @@
 
 struct Population
     members::Array{Individual}
-    fitness::Array{Int}
+    fitness::Array{Any}
 
-    Population() = new(Individual[], Int[])
+    Population() = new(Individual[], Any[])
 end
 
 # Add individual to the population
 function addIndividual(pop::Population, ind::Individual)
-    push!(pop.members, ind)
+    push!(pop.members, deepcopy(ind))
 end
 
 # Get the number of individuals in the population

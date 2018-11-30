@@ -1,33 +1,31 @@
 #####################################################################
 # The controller used to run the Snake game when there is no output.
 #
-#include("../model/Board.jl")
-#include("../model/Snake.jl")
-#include("../model/Block.jl")
+struct FitnessMeasure
+	score::Int
+	timeAlive::Int
+end
 
 currBoard = Board()
 
 # Function to play Snake, the snake brain is passed to the function in the
 # place of deciding which direction to move in.
 function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=200)
+	timeAlive = 0
 	# Start at some starting board
 	global currBoard = Board()
 	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
 	numWithoutFood = 0
 
-	#println()
-	#println(currBoard)
-	#println(brain)
-
 	# Game loop
 	while true
 		newMove = eval(Meta.parse(brain))
-		#newMove = "up"
-		#newMove = chooseRandDirection()
 
 		if applyMove(currBoard, newMove) == -1
 			break
 		end
+
+		timeAlive = timeAlive + 1
 
 		if checkFood(currBoard) == 0
 			if numWithoutFood > stopAt
@@ -37,12 +35,9 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 		else
 			numWithoutFood = 0
 		end
-
-		#outputPlainText(currBoard)
-		#sleep(0.1)
 	end
 
-	return currBoard.score
+	return FitnessMeasure(currBoard.score, timeAlive)#currBoard.score
 end
 
 # Update the head of the snake based on the move, return -1 on collision (game over)
