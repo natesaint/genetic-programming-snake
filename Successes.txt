@@ -98,3 +98,6 @@ push!(functionSet, ifMovingRight)
 SelectionStrat = TournamentSelection
 Crossover = 0.90
 Reproduction = 0.10
+
+
+NEW TERMINAL SET (I noticed that the snake struggles to avoid walls, maybe it needs to much space to generate the logic it would take to handle each of the 4 cases, with this, it can be more generic --- REPORT IDEAS??)

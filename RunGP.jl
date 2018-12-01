@@ -24,7 +24,7 @@ ops = GeneticOperator[]
 push!(ops, Crossover(0.90))
 push!(ops, Reproduction(0.10))
 
-createSystem(gp, 500, 200, strat, ops)
+createSystem(gp, 500, 500, strat, ops)
 #createSystem(gp, 10, 20, strat, ops)
 #createSystem(gp, 2, 3, strat, ops)
 
@@ -36,7 +36,7 @@ createSystem(gp, 500, 200, strat, ops)
 functionSet = Function[]
 #push!(functionSet, connector)
 push!(functionSet, ifFoodAhead)
-push!(functionSet, ifFoodBehind)
+#push!(functionSet, ifFoodBehind)
 push!(functionSet, ifDangerAhead)
 push!(functionSet, ifDangerRight)
 push!(functionSet, ifDangerLeft)

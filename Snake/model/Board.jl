@@ -11,7 +11,7 @@ mutable struct Board
 	score::Int
 	snake::Snake
 	food::Food
-	move::String # Value to change when deciding on move
+	move::Symbol#String # Value to change when deciding on move
 
 	Board() = new()
 	Board(w, h, s, sk, f, m) = new(w, h, s, sk, f, m)

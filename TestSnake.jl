@@ -6,7 +6,9 @@ include("./Snake/LoadSnake.jl")
 include("./GP/LoadGP.jl")
 
 # Individual to test
-bestOfStr = "ifFoodDown(ifFoodLeft(moveDown(), ifFoodLeft(moveLeft(), ifFoodUp(moveRight(), moveDown()))), ifFoodUp(ifFoodUp(moveUp(), moveDown()), ifFoodUp(ifFoodUp(moveUp(), moveDown()), ifFoodRight(moveRight(), moveLeft()))))"
+
+# This one achieved a score of 87 with the current settings
+bestOfStr = "ifFoodAhead(forward(), ifFoodUp(ifDangerTwoAhead(turnLeft(), ifDangerRight(forward(), ifMovingDown(ifFoodUp(ifFoodUp(forward(), ifFoodUp(forward(), ifFoodAhead(turnRight(), forward()))), ifFoodLeft(turnRight(), turnLeft())), ifDangerAhead(turnRight(), turnRight())))), ifMovingRight(ifDangerLeft(ifFoodLeft(ifDangerRight(ifFoodAhead(forward(), ifFoodUp(turnLeft(), forward())), ifMovingDown(ifFoodUp(turnRight(), ifFoodAhead(turnRight(), turnRight())), ifDangerAhead(turnLeft(), forward()))), turnLeft()), ifFoodLeft(forward(), ifDangerTwoAhead(ifMovingRight(turnLeft(), turnLeft()), ifMovingLeft(forward(), turnRight())))), ifDangerRight(ifDangerTwoAhead(turnLeft(), ifDangerRight(ifFoodAhead(ifDangerAhead(turnLeft(), forward()), turnLeft()), ifMovingDown(ifFoodUp(turnRight(), ifFoodUp(turnRight(), forward())), ifDangerAhead(ifMovingRight(turnLeft(), turnRight()), turnLeft())))), ifDangerTwoAhead(ifMovingRight(turnLeft(), turnLeft()), forward())))))"
 
 #
 # Run the best of individual

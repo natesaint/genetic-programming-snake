@@ -10,11 +10,11 @@ currBoard = Board()
 
 # Function to play Snake, the snake brain is passed to the function in the
 # place of deciding which direction to move in.
-function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=200)
+function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=300)
 	timeAlive = 0
 	# Start at some starting board
 	global currBoard = Board()
-	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
+	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, :up)
 	numWithoutFood = 0
 
 	# Game loop
@@ -41,10 +41,10 @@ function playGameNoOutput(brain::String, initialSnake::Snake, initialFood::Block
 end
 
 # Update the head of the snake based on the move, return -1 on collision (game over)
-function applyMove(b::Board, move::String)
+function applyMove(b::Board, move::Symbol)
 
 	# Make sure you can't move in direction of snake
-	if b.move != "" && ((move == "up" && b.move == "down") || (move == "down" && b.move == "up") || (move == "left" && b.move == "right") || (move == "right" && b.move == "left"))
+	if (move == :up && b.move == :down) || (move == :down && b.move == :up) || (move == :left && b.move == :right) || (move == :right && b.move == :left)
 		move = b.move
 	end
 	newSnakeBlock = createNewSnakeBlock(b, move)
@@ -71,18 +71,18 @@ function applyMove(b::Board, move::String)
 end
 
 # Create a new head of the snake based on the move and current head position
-function createNewSnakeBlock(b::Board, move::String)
+function createNewSnakeBlock(b::Board, move::Symbol)
 	newSnakeBlock = SnakeBlock(-1, -1)
-	if move == "up"
+	if move == :up
 		newSnakeBlock.x = b.snake.snake[1].x
 		newSnakeBlock.y = b.snake.snake[1].y - 1
-	elseif move == "down"
+	elseif move == :down
 		newSnakeBlock.x = b.snake.snake[1].x
 		newSnakeBlock.y = b.snake.snake[1].y + 1
-	elseif move == "left"
+	elseif move == :left
 		newSnakeBlock.x = b.snake.snake[1].x - 1
 		newSnakeBlock.y = b.snake.snake[1].y
-	elseif move == "right"
+	elseif move == :right
 		newSnakeBlock.x = b.snake.snake[1].x + 1
 		newSnakeBlock.y = b.snake.snake[1].y
 	end
@@ -90,7 +90,7 @@ function createNewSnakeBlock(b::Board, move::String)
 end
 
 # Update the position of the snake based on the move
-function updateSnakePos(b::Board, move::String, newSnakeBlock::SnakeBlock)
+function updateSnakePos(b::Board, move::Symbol, newSnakeBlock::SnakeBlock)
 	if length(b.snake.snake) != 1
 		for i in length(b.snake.snake):-1:2
 			b.snake.snake[i] = b.snake.snake[i - 1]
@@ -134,6 +134,6 @@ end
 
 # Choose random direction
 function chooseRandDirection()
-	directions = ["up", "down", "right", "left"]
+	directions = [:up, :down, :right, :left]
 	return directions[rand(1:4)]
 end

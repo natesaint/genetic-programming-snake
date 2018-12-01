@@ -74,7 +74,7 @@ function geneticOperation(c::Crossover, state::State, system::System, newPop::Po
     #println(x)
     #println(y)
 
-    if x > 5 || y > 5
+    if x > 10 || y > 10
         return
     end
 

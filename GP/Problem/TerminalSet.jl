@@ -23,19 +23,19 @@ end
 #
 
 function moveUp()
-    return "up"
+    return :up
 end
 
 function moveDown()
-    return "down"
+    return :down
 end
 
 function moveLeft()
-    return "left"
+    return :left
 end
 
 function moveRight()
-    return "right"
+    return :right
 end
 
 # New terminal set
@@ -44,25 +44,25 @@ function forward()
 end
 
 function turnLeft()
-    if currBoard.move == "up"
-        return "left"
-    elseif currBoard.move == "down"
-        return "right"
-    elseif currBoard.move == "left"
-        return "down"
+    if currBoard.move == :up
+        return :left
+    elseif currBoard.move == :down
+        return :right
+    elseif currBoard.move == :left
+        return :down
     else
-        return "up"
+        return :up
     end
 end
 
 function turnRight()
-    if currBoard.move == "up"
-        return "right"
-    elseif currBoard.move == "down"
-        return "left"
-    elseif currBoard.move == "left"
-        return "up"
+    if currBoard.move == :up
+        return :right
+    elseif currBoard.move == :down
+        return :left
+    elseif currBoard.move == :left
+        return :up
     else
-        return "down"
+        return :down
     end
 end

@@ -11,7 +11,7 @@
 function playGameOutput(brain::String, initialSnake::Snake, initialFood::Block, sizeX::Int=30, sizeY::Int=30, stopAt::Int=200)
 	# Start at some starting board
 	global currBoard = Board()
-	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, "")
+	currBoard = Board(sizeX, sizeY, 0, initialSnake, initialFood, :up)
 	numWithoutFood = 0
 
 	#println()
