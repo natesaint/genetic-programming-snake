@@ -9,15 +9,9 @@ end
 
 # Genetic programming crossover genetic operator
 function geneticOperation(c::Crossover, state::State, system::System, newPop::Population)
-    #println("Performing crossover")
     # Select two individuals
     indivOne = deepcopy(selectIndividual(system.selectionStrategy, state.currPopulation))
     indivTwo = deepcopy(selectIndividual(system.selectionStrategy, state.currPopulation))
-
-    #println("Indiv ONE")
-    #printIndividual(indivOne)
-    #println("Indiv TWO")
-    #printIndividual(indivTwo)
 
     if indivOne.numNodes < 2 || indivTwo.numNodes < 2
         return
@@ -38,15 +32,6 @@ function geneticOperation(c::Crossover, state::State, system::System, newPop::Po
     getNodeAt(indivOne.root, posOne, Count(0), foundOne)
     getNodeAt(indivTwo.root, posTwo, Count(0), foundTwo)
 
-    #print("\n\nPOS ONE")
-    #println(posOne)
-    #print("POS TWO")
-    #println(posTwo)
-    #println("\nFOUND ONE")
-    #visualizeTree(foundOne.node, 0)
-    #println("FOUND TWO")
-    #visualizeTree(foundTwo.node, 0)
-
     # Swap the branches that were selected
     newIndivOne = deepcopy(indivOne)
     newIndivTwo = deepcopy(indivTwo)
@@ -61,35 +46,16 @@ function geneticOperation(c::Crossover, state::State, system::System, newPop::Po
     newIndivOne.root = deepcopy(rootOne)
     newIndivTwo.root = deepcopy(rootTwo)
 
-    #println("\nROOT ONE") # THE CROSSOVER SWAP DOESN"T WORK AT ALL WHEN THE SELECTED ELEMENT IS AN INTERNAL NODE
-    #visualizeTree(newIndivOne.root, 0)
-    #println("ROOT TWO")
-    #visualizeTree(newIndivTwo.root, 0)
-
     # Check if it is at the limit
     x = getDepth(newIndivOne.root)
     y = getDepth(newIndivTwo.root)
 
-    #println("NEW DEPTHS")
-    #println(x)
-    #println(y)
-
-    if x > 10 || y > 10
+    if x > 6 || y > 6
         return
     end
 
-    #println("before insert")
-    #println(getNumIndividuals(newPop))
-    #for indivi in newPop.members
-    #    printIndividual(indivi)
-    #end
     addIndividual(newPop, deepcopy(newIndivOne))
     addIndividual(newPop, deepcopy(newIndivTwo))
-    #println("after insert")
-    #println(getNumIndividuals(newPop))
-    #for indivi in newPop.members
-    #    printIndividual(indivi)
-    #end
 end
 
 # Get the depth of a tree
@@ -128,8 +94,6 @@ function insertBranch(arr::Array{TreeNode}, newBranch::TreeNode, target::Int)
     # Run through the array backwards and create the new tree
     i = length(arr)
     while i > 0
-        #println(i)
-        #printArray(arr)
 
         if typeof(arr[i]) == InternalNode
             numArgs = 0

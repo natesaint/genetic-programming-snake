@@ -2,8 +2,6 @@
 # Represent the current board that Snake is being played
 # on. Contains a snake, food, and score.
 #
-#include("./Snake.jl")
-#include("./Food.jl")
 
 mutable struct Board
 	width::Int

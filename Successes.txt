@@ -1,3 +1,5 @@
+# FILE CONTAINING MEANINGLESS NOTES ABOUT THE RESULTS OF RUNS
+
 FITNESS FUNCTION JUST SCORE
 
 ifDangerAhead(ifFoodRight(ifDangerAhead(ifDangerLeft(ifFoodRight(ifDangerAhead(moveLeft(), moveLeft()), moveRight()), ifFoodUp(ifMovingLeft(moveDown(), moveRight()), ifFoodRight(moveDown(), moveLeft()))), ifMovingDown(ifMovingLeft(ifDangerRight(moveDown(), moveUp()), ifMovingRight(moveUp(), moveRight())), moveRight())), ifMovingDown(ifFoodAhead(ifDangerRight(ifFoodRight(moveDown(), moveLeft()), ifDangerRight(moveDown(), moveRight())), ifMovingUp(moveUp(), ifMovingRight(moveLeft(), moveLeft()))), ifDangerTwoAhead(ifMovingRight(ifDangerAhead(moveRight(), moveUp()), moveUp()), ifDangerRight(ifFoodRight(moveRight(), moveUp()), ifMovingLeft(moveDown(), moveUp()))))), ifMovingRight(ifDangerTwoAhead(ifMovingRight(ifDangerAhead(ifMovingUp(moveLeft(), moveLeft()), ifMovingLeft(moveLeft(), moveRight())), ifFoodRight(ifDangerRight(moveDown(), moveLeft()), ifFoodAhead(moveRight(), moveLeft()))), ifMovingDown(ifMovingRight(ifMovingRight(moveUp(), moveUp()), ifFoodAhead(moveUp(), moveLeft())), ifMovingRight(moveLeft(), ifFoodRight(moveRight(), moveRight())))), ifMovingDown(ifDangerAhead(ifDangerTwoAhead(ifDangerRight(moveUp(), moveLeft()), ifMovingLeft(moveUp(), moveLeft())), moveDown()), ifFoodRight(ifFoodUp(ifFoodUp(moveUp(), moveUp()), ifDangerRight(moveDown(), moveRight())), moveLeft()))))
@@ -100,6 +102,6 @@ Crossover = 0.90
 Reproduction = 0.10
 
 
-NEW TERMINAL SET (I noticed that the snake struggles to avoid walls, maybe it needs to much space to generate the logic it would take to handle each of the 4 cases, with this, it can be more generic --- REPORT IDEAS??)
+NEW TERMINAL SET
 ifFoodAhead(forward(), ifFoodUp(ifDangerTwoAhead(ifDangerAhead(turnLeft(), forward()), ifDangerRight(forward(), ifMovingDown(ifMovingDown(ifFoodUp(turnRight(), ifFoodAhead(turnRight(), turnRight())), ifDangerAhead(turnLeft(), forward())), ifDangerAhead(turnRight(), forward())))), ifMovingRight(ifDangerLeft(turnLeft(), ifFoodLeft(forward(), ifFoodAhead(ifMovingRight(ifDangerTwoAhead(forward(), ifMovingDown(turnLeft(), forward())), turnLeft()), turnRight()))), ifDangerRight(ifDangerTwoAhead(turnLeft(), ifDangerRight(ifDangerAhead(ifDangerAhead(turnLeft(), ifMovingRight(turnLeft(), turnRight())), forward()), ifFoodAhead(forward(), ifMovingLeft(turnLeft(), turnRight())))), ifDangerTwoAhead(ifMovingRight(ifMovingDown(forward(), turnLeft()), turnLeft()), ifMovingLeft(ifMovingDown(forward(), turnLeft()), ifMovingLeft(ifDangerAhead(turnRight(), turnRight()), turnRight())))))))
 score:114

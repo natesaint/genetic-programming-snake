@@ -7,7 +7,7 @@ include("./GP/LoadGP.jl")
 
 # Individual to test
 
-# This one achieved a score of 87 with the current settings
+# This one achieved a score of 114
 bestOfStr = "ifFoodAhead(forward(), ifFoodUp(ifDangerTwoAhead(ifDangerAhead(turnLeft(), forward()), ifDangerRight(forward(), ifMovingDown(ifMovingDown(ifFoodUp(turnRight(), ifFoodAhead(turnRight(), turnRight())), ifDangerAhead(turnLeft(), forward())), ifDangerAhead(turnRight(), forward())))), ifMovingRight(ifDangerLeft(turnLeft(), ifFoodLeft(forward(), ifFoodAhead(ifMovingRight(ifDangerTwoAhead(forward(), ifMovingDown(turnLeft(), forward())), turnLeft()), turnRight()))), ifDangerRight(ifDangerTwoAhead(turnLeft(), ifDangerRight(ifDangerAhead(ifDangerAhead(turnLeft(), ifMovingRight(turnLeft(), turnRight())), forward()), ifFoodAhead(forward(), ifMovingLeft(turnLeft(), turnRight())))), ifDangerTwoAhead(ifMovingRight(ifMovingDown(forward(), turnLeft()), turnLeft()), ifMovingLeft(ifMovingDown(forward(), turnLeft()), ifMovingLeft(ifDangerAhead(turnRight(), turnRight()), turnRight())))))))"
 
 #
