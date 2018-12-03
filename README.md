@@ -1,5 +1,5 @@
 # genetic-programming-snake
-## Genetic Programming applied to the game of Snake
+## Genetic Programming applied to the Game of Snake
 
 ### Running
 1. Download The Julia Programming Language v1.0 from https://julialang.org
